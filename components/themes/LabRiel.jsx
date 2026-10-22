@@ -1,0 +1,599 @@
+'use client';
+// Generated from the Labriel design. Edit freely: it is plain React now.
+import React from 'react';
+import { C, css, shot, up, nospace } from '../../lib/runtime';
+
+const STYLES = "\nbody{margin:0;background:#0B1416}\na{color:#7CFFB2}a:hover{color:#FFFFFF}\n.syne{font-family:'Syne',sans-serif}\n.mono{font-family:'IBM Plex Mono',monospace}\n.hand{font-family:'Kalam',cursive}\n.tiles{background-color:#0E1A1C;background-image:linear-gradient(rgba(124,255,178,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(124,255,178,.05) 1px,transparent 1px);background-size:56px 56px}\n.vial{display:flex;flex-direction:column;align-items:center;gap:10px;background:transparent;border:0;color:#E6F2EE;font:inherit;cursor:pointer;padding:8px 6px;border-radius:14px;min-width:84px}\n.vial:hover{background:rgba(255,255,255,.04)}\n.vial .tube{position:relative;width:34px;height:120px;border:2.5px solid rgba(230,242,238,.7);border-top:0;border-radius:0 0 18px 18px;overflow:hidden;background:rgba(255,255,255,.04);transition:transform .25s cubic-bezier(.3,1.6,.5,1)}\n.vial .tube::before{content:\"\";position:absolute;left:-6px;right:-6px;top:0;height:4px;background:rgba(230,242,238,.7);border-radius:2px}\n.vial .liq{position:absolute;left:0;right:0;bottom:0;transition:height .4s ease}\n.vial .liq::after{content:\"\";position:absolute;left:4px;top:6px;width:5px;height:40%;border-radius:4px;background:rgba(255,255,255,.35)}\n.vial.on .tube{transform:translateY(-10px) rotate(-8deg)}\n.vial.on{background:rgba(124,255,178,.08);box-shadow:inset 0 0 0 1.5px rgba(124,255,178,.5)}\n.vial .nm{font-weight:600;font-size:14px}\n.vial .sub{font-family:'IBM Plex Mono',monospace;font-size:11px;opacity:.7}\n.lbtn{display:inline-flex;align-items:center;justify-content:center;gap:8px;box-sizing:border-box;line-height:1;font-family:'Syne',sans-serif;font-weight:800;font-size:17px;border-radius:14px;padding:0 24px;min-height:54px;cursor:pointer;text-decoration:none}\n.lbtn.go{background:#7CFFB2;color:#0B1416;border:0;box-shadow:0 0 30px rgba(124,255,178,.35)}\n.lbtn.go:hover{background:#B8FFD6;color:#0B1416}\n.lbtn.line{background:transparent;color:#E6F2EE;border:1.5px solid rgba(230,242,238,.35)}\n.lbtn.line:hover{border-color:#7CFFB2;color:#7CFFB2}\n.el{display:flex;flex-direction:column;justify-content:space-between;aspect-ratio:1;padding:10px;border-radius:10px;border:1.5px solid rgba(230,242,238,.18);background:rgba(255,255,255,.03);color:#E6F2EE;font:inherit;text-align:left;cursor:pointer;min-width:0}\n.el:hover{border-color:rgba(230,242,238,.5)}\n.el.on{border-color:currentColor;box-shadow:0 0 24px rgba(124,255,178,.18)}\n.el .n{font-family:'IBM Plex Mono',monospace;font-size:11px;opacity:.7}\n.el .s{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(24px,3vw,36px);line-height:1}\n.el .w{font-size:12px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}\n.found{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;border:1px dashed rgba(230,242,238,.25);font-size:14px}\n.found.on{border-style:solid;border-color:rgba(124,255,178,.5);background:rgba(124,255,178,.06)}\n";
+const FONTS = ["https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=IBM+Plex+Mono:wght@400;600&family=Kalam:wght@400;700&family=Inter:wght@400;600&display=swap"];
+
+export default class LabRiel extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  reagents() {
+    return [
+      { id: 'fe', name: 'Front end', sub: 'Fe · cyan', color: '#4FE3FF' },
+      { id: 'be', name: 'Back end', sub: 'Be · magenta', color: '#FF4FD8' },
+      { id: 'ds', name: 'Design', sub: 'Ds · amber', color: '#FFB547' },
+      { id: 'cf', name: 'Caffeine', sub: 'Cf · green', color: '#7CFFB2' }
+    ];
+  }
+  recipes() {
+    return {
+      'be+fe': { key: 'p1', label: 'Project 1', formula: `Fe + Be → ${up(C.projects[0].type)}`, title: `${C.projects[0].name}`, body: `${C.projects[0].summary}`, proj: true, ink: '#0B7A8F' },
+      'be+ds': { key: 'p2', label: 'Project 2', formula: `Be + Ds → ${up(C.projects[1].type)}`, title: `${C.projects[1].name}`, body: `${C.projects[1].summary}`, proj: true, ink: '#A3268A' },
+      'ds+fe': { key: 'p3', label: 'Project 3', formula: `Fe + Ds → ${up(C.projects[2].type)}`, title: `${C.projects[2].name}`, body: `${C.projects[2].summary}`, proj: true, ink: '#A86A00' },
+      'cf': { key: 'cf', label: 'Overnight build', formula: '? + Cf → OVERNIGHT BUILD', title: 'A prototype by 6am.', body: 'Highly unstable. Surprisingly functional. Do not ship without sleep. (Try another mix for a real project.)', proj: false, ink: '#1E8F55' }
+    };
+  }
+  componentDidMount() {
+    this.f = 0;
+    this.timer = setInterval(() => { this.f += 1; this.setState({ f: this.f }); }, 70);
+  }
+  componentWillUnmount() { clearInterval(this.timer); clearTimeout(this.mixT); }
+  blend(a, b) {
+    const h = (c) => [1, 3, 5].map((i) => parseInt(c.slice(i, i + 2), 16));
+    const x = h(a), y = h(b);
+    return '#' + x.map((v, i) => Math.round((v + y[i]) / 2).toString(16).padStart(2, '0')).join('');
+  }
+  renderVals() {
+    const s = this.state || {};
+    const f = s.f || 0;
+    const R = this.reagents();
+    const sel = s.sel || [];
+    const byId = {}; R.forEach((r) => { byId[r.id] = r; });
+    const stage = s.stage || 'idle';
+    const reacting = stage === 'reacting';
+    const done = stage === 'done';
+    const rec = this.recipes();
+    const keyOf = (ids) => ids.indexOf('cf') !== -1 ? 'cf' : ids.slice().sort().join('+');
+    const result = s.res && !reacting ? rec[s.res] : null;
+    const disc = s.disc || {};
+
+    // hero bubbles
+    const hb = {};
+    [[80, 0], [130, 30], [170, 60], [110, 90]].forEach((b, i) => {
+      const t = (f * 2.2 + b[1] * 3) % 130;
+      hb['x' + (i + 1)] = b[0] + Math.sin((f + i * 20) / 8) * 6;
+      hb['y' + (i + 1)] = 268 - t;
+    });
+    [[140, 0], [118, 40]].forEach((b, i) => {
+      const t = (f * 1.6 + b[1]) % 90;
+      hb['x' + (i + 5)] = b[0] + Math.sin((f + i * 30) / 6) * 8;
+      hb['y' + (i + 5)] = 10 - t;
+      hb['o' + (i + 5)] = (1 - t / 90).toFixed(2);
+    });
+
+    // mixing flask
+    const cols = sel.map((id) => byId[id].color);
+    const liqColor = cols.length === 2 ? this.blend(cols[0], cols[1]) : (cols[0] || '#1C2B2E');
+    const level = sel.length === 0 ? 290 : (sel.length === 1 ? 220 : (reacting || done ? 130 : 170));
+    const mb = { o: reacting ? 0.85 : (sel.length ? 0.35 : 0) };
+    [[90, 0], [130, 25], [170, 50], [115, 75]].forEach((b, i) => {
+      const sp = reacting ? 7 : 2;
+      const t = (f * sp + b[1] * 2) % 160;
+      mb['x' + (i + 1)] = b[0] + Math.sin((f + i * 17) / 5) * (reacting ? 14 : 5);
+      mb['y' + (i + 1)] = 268 - t;
+    });
+    const wob = (k) => Math.round(-6 - Math.abs(Math.sin((f + k * 7) / 3)) * 26);
+
+    const vials = R.map((r) => {
+      const on = sel.indexOf(r.id) !== -1;
+      return {
+        name: r.name, sub: r.sub, color: r.color,
+        level: on ? 25 : 70,
+        cls: on ? 'on' : '', pressed: on ? 'true' : 'false',
+        pick: () => {
+          if (reacting) return;
+          let n = sel.slice();
+          if (on) n = n.filter((x) => x !== r.id);
+          else { if (n.length >= 2) n.shift(); n.push(r.id); }
+          this.setState({ sel: n, stage: 'idle' });
+        }
+      };
+    });
+    const canMix = sel.length === 2 && !reacting;
+    const runMix = (ids) => {
+      this.setState({ sel: ids, stage: 'reacting', mixed: ids.slice() });
+      clearTimeout(this.mixT);
+      this.mixT = setTimeout(() => {
+        const k = keyOf(ids);
+        const d = Object.assign({}, (this.state && this.state.disc) || {}); d[rec[k].key] = true;
+        this.setState({ stage: 'done', disc: d, res: k });
+      }, 1700);
+    };
+    const recipeFor = { p1: ['fe', 'be'], p2: ['be', 'ds'], p3: ['fe', 'ds'], cf: ['fe', 'cf'] };
+    const resKey = s.res ? rec[s.res].key : null;
+    const found = [['p1', 'Project 1'], ['p2', 'Project 2'], ['p3', 'Project 3'], ['cf', 'Overnight build']].map((x) => {
+      const got = !!disc[x[0]];
+      const cur = resKey === x[0] && !reacting;
+      return {
+        label: got ? x[1] : '??? · mix it for me',
+        title: got ? 'Open ' + x[1] : 'Mix the recipe for this one',
+        pressed: cur ? 'true' : 'false',
+        bg: cur ? '#7CFFB2' : (got ? '#0B1416' : 'transparent'),
+        fg: cur ? '#0B1416' : (got ? '#7CFFB2' : '#3D5C55'),
+        border: got || cur ? '#0B1416' : '#9FB5AE',
+        open: () => {
+          if (reacting) return;
+          const ids = recipeFor[x[0]];
+          if (got) { clearTimeout(this.mixT); this.setState({ sel: ids, stage: 'done', res: keyOf(ids) }); }
+          else runMix(ids);
+        }
+      };
+    });
+
+    // elements
+    const E = [
+      { sym: 'Ui', name: 'Interfaces', group: 'FRONT END', color: '#4FE3FF', body: `${C.skills.frontend}` },
+      { sym: 'Ux', name: 'Design', group: 'FRONT END', color: '#4FE3FF', body: '[How you approach design and usability.]' },
+      { sym: 'Ap', name: 'APIs', group: 'BACK END', color: '#FF4FD8', body: `${C.skills.backend}` },
+      { sym: 'Db', name: 'Databases', group: 'BACK END', color: '#FF4FD8', body: '[Databases you work with.]' },
+      { sym: 'Cl', name: 'Cloud', group: 'BACK END', color: '#FF4FD8', body: '[Cloud and deployment tools.]' },
+      { sym: 'Bz', name: 'Business', group: 'FOUNDER', color: '#FFB547', body: `${C.skills.business}` },
+      { sym: 'Cx', name: 'Clients', group: 'FOUNDER', color: '#FFB547', body: '[How you work with clients.]' },
+      { sym: 'Cf', name: 'Caffeine', group: 'CATALYST', color: '#7CFFB2', body: 'Speeds up every reaction. Side effects include 2am commits.' }
+    ];
+    const ei = s.el === undefined ? 0 : s.el;
+    const elements = E.map((e, i) => ({ num: String(i + 1).padStart(2, '0'), sym: e.sym, name: e.name, color: e.color, cls: ei === i ? 'on' : '', pressed: ei === i ? 'true' : 'false', pick: () => this.setState({ el: i }) }));
+
+    let mixLabel = 'Empty. Pick two reagents.';
+    if (sel.length === 1) mixLabel = byId[sel[0]].name + ' + …';
+    if (sel.length === 2) mixLabel = byId[sel[0]].name + ' + ' + byId[sel[1]].name;
+    return {
+      hb: hb, mb: mb,
+      vials: vials,
+      liqY: level, liqColor: liqColor,
+      foamColor: liqColor, foamOp: reacting ? 0.9 : 0,
+      fy1: wob(1), fy2: wob(2) - 6, fy3: wob(3) - 16, fy4: wob(4) + 4, fy5: wob(5),
+      sparkOp: reacting && f % 4 < 2 ? 1 : 0,
+      mixLabel: mixLabel,
+      mixBtn: reacting ? 'Mixing…' : (done ? 'Mix again' : 'Mix'),
+      mixDisabled: canMix ? 'false' : 'true',
+      mixOp: canMix ? 1 : 0.4,
+      mix: () => { if (canMix) runMix(sel.slice()); },
+      empty: () => { clearTimeout(this.mixT); this.setState({ sel: [], stage: 'idle' }); },
+      noResult: !s.res && !reacting,
+      reacting: reacting,
+      hasResult: !!result,
+      resFormula: result ? result.formula : '',
+      resTitle: result ? result.title : '',
+      resBody: result ? result.body : '',
+      resIdx: result && result.key && result.key.charAt(0) === 'p' ? parseInt(result.key.slice(1), 10) - 1 : 0,
+      resIsProj: !!(result && result.proj),
+      resInk: result ? result.ink : '#0B1416',
+      found: found,
+      foundN: String(Object.keys(disc).length),
+      elements: elements,
+      elSym: E[ei].sym, elName: E[ei].name, elGroup: E[ei].group, elColor: E[ei].color, elBody: E[ei].body
+    };
+  }
+
+  render() {
+    const v = this.renderVals ? this.renderVals() || {} : {};
+    return (
+      <>
+        {FONTS.map((href) => <link key={href} rel="stylesheet" href={href} />)}
+        <style dangerouslySetInnerHTML={{ __html: STYLES }} />
+      <div className="tiles" style={css("min-height: 100vh; color: #E6F2EE; font-family: 'Inter', system-ui, sans-serif")}>
+        <div style={css("background: #060B0C; color: #9FB5AE; font-size: 14px; padding: 10px 24px; display: flex; flex-wrap: wrap; gap: 8px 20px; justify-content: center; align-items: center")} className="mono">
+          <span>
+            {"Theme: Lab-riel"}
+          </span>
+          {" "}
+          <a href="/pro" style={css("padding: 6px 0")}>
+            {"Switch to professional"}
+          </a>
+          {" "}
+          <a href="/" style={css("padding: 6px 0")}>
+            {"Deal again"}
+          </a>
+        </div>
+        {" "}
+        {" "}
+        <header id="top" style={css("max-width: 1200px; margin: 0 auto; padding: 64px 24px 40px; display: flex; flex-wrap: wrap; gap: 40px; align-items: center; justify-content: space-between")}>
+          <div style={css("flex: 1 1 460px; display: flex; flex-direction: column; gap: 18px; min-width: 0")}>
+            <span className="mono" style={css("font-size: 13px; letter-spacing: .16em; color: #7CFFB2")}>
+              {"EXPERIMENT No. RGG-01 · FULL-STACK DEVELOPER · FOUNDER"}
+            </span>
+            {" "}
+            <h1 className="syne" style={css("margin: 0; font-size: clamp(70px, 11vw, 150px); line-height: .88; letter-spacing: -.03em")}>
+              {"Lab-"}
+              <br />
+              <span style={css("color: #7CFFB2; text-shadow: 0 0 40px rgba(124,255,178,.45)")}>
+                {"riel"}
+              </span>
+            </h1>
+            {" "}
+            <p style={css("margin: 0; font-size: 20px; line-height: 1.55; max-width: 520px; color: #C7D8D2")}>
+              {"Raphael Gabriel Geronimo. Mixing front end, back end and design in questionable quantities, and somehow it always works."}
+            </p>
+            {" "}
+            <span className="hand" style={css("font-size: 26px; color: #FFB547; transform: rotate(-2deg); align-self: flex-start")}>
+              {"It's alive! (mostly tested)"}
+            </span>
+          </div>
+          {" "}
+          <svg viewBox="0 0 260 300" aria-hidden="true" style={css("flex: 0 1 300px; width: 300px; max-width: 80vw; height: auto")}>
+            <defs>
+              <clipPath id="heroFlask">
+                <path d="M104 20 H156 V110 L224 250 Q232 272 210 272 H50 Q28 272 36 250 L104 110 Z"></path>
+              </clipPath>
+            </defs>
+            {" "}
+            <g clipPath="url(#heroFlask)">
+              <rect x="0" y="150" width="260" height="140" fill="#7CFFB2" opacity=".85"></rect>
+              {" "}
+              <rect x="0" y="150" width="260" height="10" fill="#B8FFD6"></rect>
+              {" "}
+              <circle cx={v.hb.x1} cy={v.hb.y1} r="7" fill="#DFFFF0" opacity=".8"></circle>
+              {" "}
+              <circle cx={v.hb.x2} cy={v.hb.y2} r="5" fill="#DFFFF0" opacity=".8"></circle>
+              {" "}
+              <circle cx={v.hb.x3} cy={v.hb.y3} r="9" fill="#DFFFF0" opacity=".7"></circle>
+              {" "}
+              <circle cx={v.hb.x4} cy={v.hb.y4} r="4" fill="#DFFFF0" opacity=".8"></circle>
+            </g>
+            {" "}
+            <path d="M104 20 H156 V110 L224 250 Q232 272 210 272 H50 Q28 272 36 250 L104 110 Z" fill="none" stroke="#E6F2EE" strokeWidth="5" strokeLinejoin="round"></path>
+            {" "}
+            <path d="M96 20 H164" stroke="#E6F2EE" strokeWidth="6" strokeLinecap="round"></path>
+            {" "}
+            <path d="M118 140 L80 230" stroke="#FFFFFF" strokeWidth="6" strokeLinecap="round" opacity=".35"></path>
+            {" "}
+            <circle cx={v.hb.x5} cy={v.hb.y5} r="6" fill="none" stroke="#7CFFB2" strokeWidth="2.5" opacity={v.hb.o5}></circle>
+            {" "}
+            <circle cx={v.hb.x6} cy={v.hb.y6} r="9" fill="none" stroke="#7CFFB2" strokeWidth="2.5" opacity={v.hb.o6}></circle>
+          </svg>
+        </header>
+        {" "}
+        {" "}
+        <section id="work" style={css("max-width: 1200px; margin: 0 auto; padding: 40px 24px 80px; display: flex; flex-direction: column; gap: 28px")}>
+          <div style={css("display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px")}>
+            <div style={css("display: flex; flex-direction: column; gap: 8px")}>
+              <span className="mono" style={css("font-size: 13px; letter-spacing: .16em; color: #9FB5AE")}>
+                {"THE BENCH · PROJECTS"}
+              </span>
+              {" "}
+              <h2 className="syne" style={css("margin: 0; font-size: clamp(40px, 6vw, 68px); line-height: .95")}>
+                {"Mix two. See what happens."}
+              </h2>
+            </div>
+            {" "}
+            <p className="hand" style={css("margin: 0; font-size: 22px; color: #FFB547; max-width: 360px")}>
+              {"Pick two reagents, then hit mix. Every combination makes something I've built."}
+            </p>
+          </div>
+          {" "}
+          <div style={css("display: flex; flex-wrap: wrap; gap: 24px; align-items: stretch")}>
+            {" "}
+            <div style={css("flex: 1 1 520px; min-width: 0; background: rgba(6,11,12,.7); border: 1.5px solid rgba(230,242,238,.12); border-radius: 22px; padding: 22px; display: flex; flex-direction: column; gap: 20px")}>
+              <div style={css("display: flex; flex-wrap: wrap; justify-content: space-around; gap: 8px")}>
+                {(v.vials || []).map((v, __i0) => (
+                  <React.Fragment key={__i0}>
+                    <button type="button" className={`vial ${v.cls}`} onClick={v.pick} aria-pressed={v.pressed}>
+                      <span className="tube">
+                        <span className="liq" style={css(`height: ${v.level}%; background: ${v.color}; box-shadow: 0 0 18px ${v.color}`)}></span>
+                      </span>
+                      {" "}
+                      <span className="nm">
+                        {v.name}
+                      </span>
+                      <span className="sub">
+                        {v.sub}
+                      </span>
+                    </button>
+                  </React.Fragment>
+                ))}
+              </div>
+              {" "}
+              <div style={css("display: flex; flex-wrap: wrap; gap: 24px; align-items: center; justify-content: center")}>
+                <svg viewBox="0 0 260 300" aria-hidden="true" style={css("width: 220px; height: auto; flex: none; overflow: visible")}>
+                  <defs>
+                    <clipPath id="mixFlask">
+                      <path d="M104 20 H156 V110 L224 250 Q232 272 210 272 H50 Q28 272 36 250 L104 110 Z"></path>
+                    </clipPath>
+                  </defs>
+                  {" "}
+                  <g clipPath="url(#mixFlask)">
+                    <rect x="0" y={v.liqY} width="260" height="300" fill={v.liqColor} opacity=".9" style={css("transition: y .8s cubic-bezier(.3,1.2,.5,1), fill .8s ease")}></rect>
+                    {" "}
+                    <circle cx={v.mb.x1} cy={v.mb.y1} r="8" fill="#FFFFFF" opacity={v.mb.o}></circle>
+                    {" "}
+                    <circle cx={v.mb.x2} cy={v.mb.y2} r="5" fill="#FFFFFF" opacity={v.mb.o}></circle>
+                    {" "}
+                    <circle cx={v.mb.x3} cy={v.mb.y3} r="10" fill="#FFFFFF" opacity={v.mb.o}></circle>
+                    {" "}
+                    <circle cx={v.mb.x4} cy={v.mb.y4} r="6" fill="#FFFFFF" opacity={v.mb.o}></circle>
+                  </g>
+                  {" "}
+                  <path d="M104 20 H156 V110 L224 250 Q232 272 210 272 H50 Q28 272 36 250 L104 110 Z" fill="none" stroke="#E6F2EE" strokeWidth="5" strokeLinejoin="round"></path>
+                  {" "}
+                  <path d="M96 20 H164" stroke="#E6F2EE" strokeWidth="6" strokeLinecap="round"></path>
+                  {" "}
+                  {" "}
+                  <g fill={v.foamColor} opacity={v.foamOp} style={css("transition: opacity .3s")}>
+                    <circle cx="118" cy={v.fy1} r="16"></circle>
+                    <circle cx="140" cy={v.fy2} r="20"></circle>
+                    <circle cx="130" cy={v.fy3} r="13"></circle>
+                    <circle cx="108" cy={v.fy4} r="10"></circle>
+                    <circle cx="152" cy={v.fy5} r="12"></circle>
+                  </g>
+                  {" "}
+                  {" "}
+                  <g stroke="#FFE88A" strokeWidth="4" strokeLinecap="round" opacity={v.sparkOp}>
+                    <path d="M70 60 L50 44 M200 70 L224 52 M60 120 L34 116 M206 128 L232 124 M130 -20 L130 -44"></path>
+                  </g>
+                </svg>
+                {" "}
+                <div style={css("display: flex; flex-direction: column; gap: 12px; min-width: 200px")}>
+                  <span className="mono" style={css("font-size: 12px; letter-spacing: .14em; color: #9FB5AE")}>
+                    {"IN THE FLASK"}
+                  </span>
+                  {" "}
+                  <span className="syne" style={css("font-size: 22px; line-height: 1.2")}>
+                    {v.mixLabel}
+                  </span>
+                  {" "}
+                  <div style={css("display: flex; flex-wrap: wrap; gap: 10px")}>
+                    <button type="button" className="lbtn go" onClick={v.mix} aria-disabled={v.mixDisabled} style={css(`opacity: ${v.mixOp}`)}>
+                      {v.mixBtn}
+                    </button>
+                    {" "}
+                    <button type="button" className="lbtn line" onClick={v.empty}>
+                      {"Empty"}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {" "}
+            {" "}
+            <div aria-live="polite" style={css("flex: 1 1 340px; min-width: 0; background: #E6F2EE; color: #0B1416; border-radius: 22px; padding: 24px; display: flex; flex-direction: column; gap: 14px; position: relative; overflow: hidden")}>
+              <span className="mono" style={css("font-size: 12px; letter-spacing: .14em; color: #3D5C55")}>
+                {"RESULT"}
+              </span>
+              {" "}
+              {v.noResult ? (
+                <>
+                  <div style={css("display: flex; flex-direction: column; gap: 10px; flex: 1; justify-content: center; align-items: flex-start")}>
+                    <span className="syne" style={css("font-size: 30px; line-height: 1")}>
+                      {"Nothing yet."}
+                    </span>
+                    {" "}
+                    <span style={css("font-size: 15px; line-height: 1.55; color: #3D5C55")}>
+                      {"Two reagents in the flask, then mix. Try Front end + Back end first. Classic."}
+                    </span>
+                  </div>
+                </>
+              ) : null}
+              {" "}
+              {v.reacting ? (
+                <>
+                  <div style={css("display: flex; flex-direction: column; gap: 10px; flex: 1; justify-content: center")}>
+                    <span className="syne" style={css("font-size: 30px; line-height: 1")}>
+                      {"Reacting…"}
+                    </span>
+                    {" "}
+                    <span className="mono" style={css("font-size: 13px; color: #3D5C55")}>
+                      {"stand back · goggles on · do not lick the bench"}
+                    </span>
+                  </div>
+                </>
+              ) : null}
+              {" "}
+              {v.hasResult ? (
+                <>
+                  <div style={css("display: flex; flex-direction: column; gap: 12px")}>
+                    <span className="mono" style={css(`font-size: 13px; font-weight: 600; color: ${v.resInk}`)}>
+                      {v.resFormula}
+                    </span>
+                    {" "}
+                    {v.resIsProj ? (
+                      <>
+                        <div style={css("height: 130px; border-radius: 12px; background: #0B1416; color: #9FB5AE; display: flex; align-items: center; justify-content: center; font-size: 14px")}>
+                          {shot(C.projects[v.resIdx])}
+                        </div>
+                      </>
+                    ) : null}
+                    {" "}
+                    <h3 className="syne" style={css("margin: 0; font-size: 30px; line-height: 1")}>
+                      {v.resTitle}
+                    </h3>
+                    {" "}
+                    <p style={css("margin: 0; font-size: 16px; line-height: 1.55")}>
+                      {v.resBody}
+                    </p>
+                    {" "}
+                    {v.resIsProj ? (
+                      <>
+                        <a href="#work" style={css("color: #0B1416; font-weight: 700")}>
+                          {"See the project →"}
+                        </a>
+                      </>
+                    ) : null}
+                  </div>
+                </>
+              ) : null}
+              {" "}
+              <div style={css("margin-top: auto; display: flex; flex-direction: column; gap: 8px; padding-top: 12px; border-top: 1px dashed #9FB5AE")}>
+                <span className="mono" style={css("font-size: 12px; color: #3D5C55")}>
+                  {"LAB NOTEBOOK · "}{v.foundN}{" OF 4 DISCOVERED · TAP ONE TO OPEN IT"}
+                </span>
+                {" "}
+                <div style={css("display: flex; flex-wrap: wrap; gap: 6px")}>
+                  {(v.found || []).map((f, __i0) => (
+                    <React.Fragment key={__i0}>
+                      <button type="button" className="mono" onClick={f.open} aria-pressed={f.pressed} title={f.title} style={css(`font-size: 12px; padding: 8px 10px; min-height: 36px; border-radius: 8px; cursor: pointer; border: 1.5px solid ${f.border}; background: ${f.bg}; color: ${f.fg}`)}>
+                        {f.label}
+                      </button>
+                    </React.Fragment>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        {" "}
+        {" "}
+        <section id="about" style={css("max-width: 1200px; margin: 0 auto; padding: 40px 24px 80px; display: flex; flex-direction: column; gap: 24px")}>
+          <div style={css("display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px")}>
+            <div style={css("display: flex; flex-direction: column; gap: 8px")}>
+              <span className="mono" style={css("font-size: 13px; letter-spacing: .16em; color: #9FB5AE")}>
+                {"THE ELEMENTS · SKILLS"}
+              </span>
+              {" "}
+              <h2 className="syne" style={css("margin: 0; font-size: clamp(40px, 6vw, 68px); line-height: .95")}>
+                {"What I'm made of."}
+              </h2>
+            </div>
+            {" "}
+            <p style={css("margin: 0; font-size: 16px; line-height: 1.6; max-width: 400px; color: #C7D8D2")}>
+              {"A tech geek who reads the label, then mixes it anyway. Tap an element. "}{C.bio.origin}
+            </p>
+          </div>
+          {" "}
+          <div style={css("display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; align-items: start")}>
+            <div style={css("display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px")}>
+              {(v.elements || []).map((e, __i0) => (
+                <React.Fragment key={__i0}>
+                  <button type="button" className={`el ${e.cls}`} onClick={e.pick} aria-pressed={e.pressed} style={css(`color: ${e.color}`)}>
+                    <span className="n">
+                      {e.num}
+                    </span>
+                    <span className="s">
+                      {e.sym}
+                    </span>
+                    <span className="w" style={css("color: #E6F2EE")}>
+                      {e.name}
+                    </span>
+                  </button>
+                </React.Fragment>
+              ))}
+            </div>
+            {" "}
+            <div style={css(`border: 1.5px solid ${v.elColor}; border-radius: 18px; padding: 24px; display: flex; flex-direction: column; gap: 12px; background: rgba(6,11,12,.6)`)}>
+              <div style={css("display: flex; align-items: baseline; gap: 14px")}>
+                <span className="syne" style={css(`font-size: 64px; line-height: 1; color: ${v.elColor}`)}>
+                  {v.elSym}
+                </span>
+                <span className="mono" style={css("font-size: 13px; color: #9FB5AE")}>
+                  {v.elGroup}
+                </span>
+              </div>
+              {" "}
+              <span className="syne" style={css("font-size: 26px")}>
+                {v.elName}
+              </span>
+              {" "}
+              <p style={css("margin: 0; font-size: 16px; line-height: 1.6; color: #C7D8D2")}>
+                {v.elBody}
+              </p>
+            </div>
+          </div>
+        </section>
+        {" "}
+        {" "}
+        <section id="venture" style={css("max-width: 1000px; margin: 0 auto; padding: 40px 24px 80px")}>
+          <div style={css("background: #F3EEDF; color: #1D2A26; border-radius: 6px; padding: clamp(28px, 5vw, 56px); box-shadow: 0 0 0 10px #0E1A1C, 0 0 0 12px rgba(230,242,238,.25), 0 30px 60px rgba(0,0,0,.5); position: relative; text-align: center; display: flex; flex-direction: column; gap: 14px; align-items: center")}>
+            <div style={css("position: absolute; inset: 14px; border: 2px solid #1D2A26; outline: 1px solid #1D2A26; outline-offset: 4px; pointer-events: none")}></div>
+            {" "}
+            <span className="mono" style={css("font-size: 13px; letter-spacing: .3em")}>
+              {"CERTIFICATE OF FOUNDING · FOUNDER OF"}
+            </span>
+            {" "}
+            <h2 className="syne" style={css("margin: 0; font-size: clamp(44px, 7vw, 84px); line-height: .95")}>
+              {C.company.name}
+            </h2>
+            {" "}
+            <p style={css("margin: 0; font-size: 18px; line-height: 1.6; max-width: 560px")}>
+              {C.company.summary}{" My other lab. Less code, more stock."}
+            </p>
+            {" "}
+            <div style={css("display: flex; flex-wrap: wrap; gap: 24px; align-items: center; justify-content: center; margin-top: 8px")}>
+              <div style={css("display: flex; flex-direction: column; align-items: center")}>
+                <span className="hand" style={css("font-size: 30px; line-height: 1")}>
+                  {"R. G. Geronimo"}
+                </span>
+                <span className="mono" style={css("font-size: 11px; border-top: 1px solid #1D2A26; padding-top: 4px")}>
+                  {"FOUNDER"}
+                </span>
+              </div>
+              {" "}
+              <div style={css("width: 96px; height: 96px; border-radius: 50%; background: radial-gradient(circle, #2E8F63 0 55%, #1E6B48 56% 100%); color: #F3EEDF; display: flex; align-items: center; justify-content: center; text-align: center; font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 600; line-height: 1.3; box-shadow: 0 0 0 4px #F3EEDF, 0 0 0 6px #2E8F63; transform: rotate(-12deg)")}>
+                {"OPEN"}
+                <br />
+                {"FOR"}
+                <br />
+                {"BUSINESS"}
+              </div>
+              {" "}
+              <a href="#venture" className="lbtn go" style={css("background: #1D2A26; color: #F3EEDF; box-shadow: none")}>
+                {"Visit the lab →"}
+              </a>
+            </div>
+          </div>
+        </section>
+        {" "}
+        {" "}
+        <section id="contact" style={css("max-width: 1100px; margin: 0 auto; padding: 40px 24px 96px; display: flex; flex-wrap: wrap; gap: 40px; align-items: center")}>
+          <div style={css("flex: 1 1 360px; display: flex; flex-direction: column; gap: 14px; min-width: 0")}>
+            <span className="mono" style={css("font-size: 13px; letter-spacing: .16em; color: #9FB5AE")}>
+              {"REQUEST LAB ACCESS"}
+            </span>
+            {" "}
+            <h2 className="syne" style={css("margin: 0; font-size: clamp(44px, 7vw, 80px); line-height: .92")}>
+              {"Got an experiment in mind?"}
+            </h2>
+            {" "}
+            <p className="hand" style={css("margin: 0; font-size: 24px; color: #FFB547")}>
+              {"Bring the idea. I'll bring the goggles."}
+            </p>
+          </div>
+          {" "}
+          <div style={css("flex: 1 1 340px; min-width: 0; max-width: 420px; background: #E6F2EE; color: #0B1416; border-radius: 20px; overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,.5)")}>
+            <div style={css("background: #7CFFB2; padding: 14px 20px; display: flex; justify-content: space-between; align-items: center")}>
+              <span className="syne" style={css("font-size: 20px")}>
+                {"LAB-RIEL"}
+              </span>
+              <span className="mono" style={css("font-size: 12px; font-weight: 600")}>
+                {"VISITOR PASS"}
+              </span>
+            </div>
+            {" "}
+            <div style={css("padding: 22px 20px; display: flex; flex-direction: column; gap: 12px")}>
+              <span className="mono" style={css("font-size: 12px; color: #3D5C55")}>
+                {"CONTACT THE LEAD SCIENTIST"}
+              </span>
+              {" "}
+              <a href={`mailto:${C.email}`} className="syne" style={css("color: #0B1416; font-size: clamp(20px, 3vw, 26px); text-underline-offset: 5px")}>
+                {C.email}
+              </a>
+              {" "}
+              <div style={css("display: flex; flex-wrap: wrap; gap: 8px 20px; font-weight: 600")}>
+                <a href={C.links.github} style={css("color: #0B1416")} target="_blank" rel="noreferrer">
+                  {"GitHub"}
+                </a>
+                <a href={C.links.linkedin} style={css("color: #0B1416")} target="_blank" rel="noreferrer">
+                  {"LinkedIn"}
+                </a>
+                <a href={C.company.url} style={css("color: #0B1416")} target="_blank" rel="noreferrer">
+                  {C.company.siteLabel}
+                </a>
+              </div>
+              {" "}
+              <div style={css("height: 44px; margin-top: 6px; background: repeating-linear-gradient(90deg, #0B1416 0 2px, transparent 2px 5px, #0B1416 5px 8px, transparent 8px 9px, #0B1416 9px 10px, transparent 10px 14px)")}></div>
+              {" "}
+              <span className="mono" style={css("font-size: 11px; color: #3D5C55")}>
+                {"© Raphael Gabriel Geronimo · clearance: curious"}
+              </span>
+            </div>
+          </div>
+        </section>
+      </div>
+      </>
+    );
+  }
+}

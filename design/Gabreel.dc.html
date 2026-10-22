@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Gab-reel — Raphael Gabriel Geronimo</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Limelight&amp;family=Playfair+Display:ital,wght@0,700;1,400;1,700&amp;family=Cutive+Mono&amp;family=Inter:wght@400;600&amp;display=swap">
+<style>
+body{margin:0;background:#050505}
+a{color:#F2F0EA}a:hover{color:#FFFFFF}
+.deco{font-family:'Limelight',serif}
+.serif{font-family:'Playfair Display',serif}
+.type{font-family:'Cutive Mono',monospace}
+.scene{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;transition:clip-path .9s cubic-bezier(.6,0,.3,1),opacity .5s ease}
+.inter{position:relative;border:3px double #D9D6CC;padding:clamp(28px,5vw,56px) clamp(24px,6vw,80px);max-width:760px;text-align:center;outline:1px solid rgba(217,214,204,.4);outline-offset:10px}
+.inter::before,.inter::after{content:"✦";position:absolute;left:50%;margin-left:-.5em;font-size:18px;color:#D9D6CC;background:#0B0B0B;padding:0 10px}
+.inter::before{top:-14px}.inter::after{bottom:-14px}
+.blinds{position:absolute;inset:0;background:repeating-linear-gradient(-28deg,rgba(0,0,0,.62) 0 22px,transparent 22px 46px);pointer-events:none}
+.strip{background:#111111;background-image:radial-gradient(circle at 10px 8px,#050505 4px,transparent 4.5px),radial-gradient(circle at 10px 8px,#050505 4px,transparent 4.5px);background-size:22px 16px,22px 16px;background-repeat:repeat-x,repeat-x;background-position:0 0,0 100%}
+.frame{flex:none;width:96px;height:58px;border:2px solid #3A3A3A;background:#1C1C1C;color:#BDBAB0;font-family:'Cutive Mono',monospace;font-size:11px;line-height:1.2;cursor:pointer;display:flex;align-items:center;justify-content:center;text-align:center;padding:4px;box-sizing:border-box;border-radius:3px}
+.frame:hover{border-color:#D9D6CC}
+.frame.on{background:#D9D6CC;color:#0B0B0B;border-color:#FFFFFF}
+.ctl{display:inline-flex;align-items:center;justify-content:center;min-width:48px;min-height:48px;padding:0 14px;border-radius:999px;border:1.5px solid #6E6B64;background:transparent;color:#F2F0EA;font-family:'Inter',sans-serif;font-weight:600;font-size:14px;cursor:pointer;box-sizing:border-box}
+.ctl:hover{border-color:#F2F0EA}
+.cast{display:grid;grid-template-columns:1fr auto 1fr;gap:10px 18px;align-items:baseline}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #050505; color: #F2F0EA; font-family: 'Inter', system-ui, sans-serif">
+
+  <div style="background: #000000; color: #D9D6CC; font-size: 14px; padding: 10px 24px; display: flex; flex-wrap: wrap; gap: 8px 20px; justify-content: center; align-items: center; border-bottom: 1px solid #222222">
+    <span class="type">Theme: Gab-reel</span>
+    <a href="Default.dc.html" style="color: #F2F0EA; padding: 6px 0">Switch to professional</a>
+    <a href="Main.dc.html" style="color: #F2F0EA; padding: 6px 0">Deal again</a>
+  </div>
+
+  <section aria-label="Gab-reel, a short film" style="position: relative; height: calc(100vh - 44px); min-height: 640px; max-height: 1000px; overflow: hidden; display: flex; flex-direction: column; background: #000000">
+
+    <!-- THE SCREEN -->
+    <div style="position: relative; flex: 1; margin: 0; background: radial-gradient(ellipse at 50% 45%, #1E1E1E 0%, #0B0B0B 70%, #030303 100%); overflow: hidden">
+
+      <!-- 0 · leader countdown -->
+      <div class="scene" aria-hidden="{{hid.s0}}" style="{{sv.s0}}">
+        <div style="position: relative; width: min(52vh, 70vw); aspect-ratio: 1; border-radius: 50%; background: conic-gradient(rgba(242,240,234,.28) {{sweep}}deg, transparent {{sweep}}deg); border: 3px solid #D9D6CC; display: flex; align-items: center; justify-content: center">
+          <div style="position: absolute; inset: 9%; border-radius: 50%; border: 2px solid #D9D6CC"></div>
+          <div style="position: absolute; left: -12%; right: -12%; top: 50%; height: 2px; background: #D9D6CC"></div>
+          <div style="position: absolute; top: -12%; bottom: -12%; left: 50%; width: 2px; background: #D9D6CC"></div>
+          <span class="deco" style="position: relative; font-size: min(28vh, 38vw); line-height: 1; color: #F2F0EA">{{leader}}</span>
+        </div>
+      </div>
+
+      <!-- 1 · studio card -->
+      <div class="scene" aria-hidden="{{hid.s1}}" style="{{sv.s1}}">
+        <div style="text-align: center; display: flex; flex-direction: column; gap: 14px; align-items: center">
+          <div style="width: 120px; height: 120px; border-radius: 50%; border: 3px solid #D9D6CC; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 60px rgba(242,240,234,.15)"><span class="deco" style="font-size: 40px">RGG</span></div>
+          <span class="deco" style="font-size: clamp(22px, 3vw, 32px); letter-spacing: .3em">PICTURES</span>
+          <span class="serif" style="font-style: italic; font-size: 20px; color: #BDBAB0">presents</span>
+        </div>
+      </div>
+
+      <!-- 2 · title -->
+      <div class="scene" aria-hidden="{{hid.s2}}" style="{{sv.s2}}">
+        <div style="position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 30%, rgba(242,240,234,.12), transparent 60%)"></div>
+        <div class="blinds" style="opacity: .55"></div>
+        <div style="position: relative; text-align: center; display: flex; flex-direction: column; gap: 18px; align-items: center; padding: 24px">
+          <span class="type" style="font-size: 14px; letter-spacing: .3em; color: #BDBAB0">A FULL-STACK NOIR</span>
+          <h1 class="deco" style="margin: 0; font-weight: 400; font-size: clamp(70px, 14vw, 190px); line-height: .9; color: #F2F0EA; text-shadow: 0 0 40px rgba(242,240,234,.25)">Gab-reel</h1>
+          <span class="serif" style="font-style: italic; font-size: clamp(18px, 2.4vw, 26px); color: #D9D6CC">starring Raphael Gabriel Geronimo</span>
+        </div>
+      </div>
+
+      <!-- 3 · intertitle -->
+      <div class="scene" aria-hidden="{{hid.s3}}" style="{{sv.s3}}">
+        <div class="inter" style="background: #0B0B0B">
+          <p class="serif" style="margin: 0; font-style: italic; font-size: clamp(24px, 3.6vw, 44px); line-height: 1.3">“The night was cold.<br>The deadline was colder.”</p>
+          <p class="type" style="margin: 22px 0 0; font-size: clamp(14px, 1.6vw, 18px); line-height: 1.6; color: #BDBAB0">One full-stack developer and founder. Seventy-two hours to ship.<br>He did it in one take.</p>
+        </div>
+      </div>
+
+      <!-- 4–6 · the cases (projects) -->
+      <sc-for list="{{cases}}" as="c" hint-placeholder-count="3">
+        <div class="scene" aria-hidden="{{c.hid}}" style="{{c.sv}}">
+          <div style="width: min(1120px, 92%); display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: clamp(20px, 4vw, 48px); align-items: center">
+            <div style="position: relative; aspect-ratio: 16 / 10; background: #2A2A2A; border: 1px solid #444444; overflow: hidden; display: flex; align-items: center; justify-content: center; box-shadow: 0 30px 60px rgba(0,0,0,.6)">
+              <span class="type" style="color: #8E8B84; font-size: 15px">⟦p{c.i}.shot⟧</span>
+              <div class="blinds"></div>
+              <div style="position: absolute; inset: 0; background: radial-gradient(ellipse at 20% 20%, rgba(242,240,234,.18), transparent 55%)"></div>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 14px">
+              <span class="type" style="font-size: 14px; letter-spacing: .24em; color: #BDBAB0">{{c.no}}</span>
+              <h2 class="deco" style="margin: 0; font-weight: 400; font-size: clamp(36px, 5vw, 64px); line-height: .95">⟦p{c.i}.name⟧</h2>
+              <div class="type" style="display: grid; grid-template-columns: 96px 1fr; gap: 8px 12px; font-size: 15px; line-height: 1.5; border-top: 1px solid #444444; padding-top: 14px">
+                <span style="color: #8E8B84">THE CLIENT</span><span>{{c.kind}}</span>
+                <span style="color: #8E8B84">THE JOB</span><span>⟦p{c.i}.summary⟧</span>
+                <span style="color: #8E8B84">VERDICT</span><span>⟦p{c.i}.result⟧</span>
+              </div>
+              <a href="#case" class="type" style="font-size: 15px; align-self: flex-start">Open the case file →</a>
+            </div>
+          </div>
+          <!-- subtitle -->
+          <div style="position: absolute; left: 0; right: 0; bottom: 6%; text-align: center; padding: 0 24px">
+            <span class="serif" style="font-style: italic; font-size: clamp(16px, 2vw, 22px); background: rgba(0,0,0,.6); padding: 4px 10px; color: #F2F0EA">{{c.sub}}</span>
+          </div>
+        </div>
+      </sc-for>
+
+      <!-- 7 · the cast (skills) -->
+      <div class="scene" aria-hidden="{{hid.s7}}" style="{{sv.s7}}">
+        <div class="inter" style="background: #0B0B0B; max-width: 820px; width: 86%">
+          <span class="deco" style="font-size: clamp(30px, 4vw, 46px)">The Cast</span>
+          <div class="cast serif" style="margin-top: 26px; font-size: clamp(16px, 2vw, 22px); text-align: left">
+            <span style="text-align: right; font-weight: 700">Front End</span><span class="type" style="color: #8E8B84">. . . . .</span><span style="font-style: italic">⟦skills.frontend⟧</span>
+            <span style="text-align: right; font-weight: 700">Back End</span><span class="type" style="color: #8E8B84">. . . . .</span><span style="font-style: italic">⟦skills.backend⟧</span>
+            <span style="text-align: right; font-weight: 700">The Business</span><span class="type" style="color: #8E8B84">. . . . .</span><span style="font-style: italic">⟦skills.business⟧</span>
+            <span style="text-align: right; font-weight: 700">The Coffee</span><span class="type" style="color: #8E8B84">. . . . .</span><span style="font-style: italic">as himself</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 8 · the studio (company) -->
+      <div class="scene" aria-hidden="{{hid.s8}}" style="{{sv.s8}}">
+        <div style="position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 120%, rgba(242,240,234,.16), transparent 60%)"></div>
+        <div style="position: relative; text-align: center; display: flex; flex-direction: column; gap: 16px; align-items: center; padding: 24px; max-width: 760px">
+          <span class="serif" style="font-style: italic; font-size: 22px; color: #BDBAB0">a</span>
+          <span class="deco" style="font-size: clamp(48px, 9vw, 110px); line-height: .95">⟦company.name⟧</span>
+          <span class="serif" style="font-style: italic; font-size: 22px; color: #BDBAB0">production</span>
+          <p class="type" style="margin: 10px 0 0; font-size: 16px; line-height: 1.6; color: #D9D6CC">⟦company.summary⟧ Founded, run and still directed by Raphael.</p>
+          <a href="#venture" class="type" style="font-size: 15px">Visit the studio →</a>
+        </div>
+      </div>
+
+      <!-- 9 · end credits (contact) -->
+      <div class="scene" aria-hidden="{{hid.s9}}" style="{{sv.s9}}">
+        <div style="position: absolute; left: 50%; bottom: 5%; width: min(640px, 90%); text-align: center; transform: translate(-50%, {{rollY}}); transition: transform {{rollT}}; display: flex; flex-direction: column; gap: 28px">
+          <span class="deco" style="font-size: clamp(34px, 5vw, 56px)">Gab-reel</span>
+          <div class="serif" style="display: flex; flex-direction: column; gap: 22px; font-size: 18px; line-height: 1.4">
+            <div><div class="type" style="font-size: 12px; letter-spacing: .24em; color: #8E8B84">DIRECTED BY</div>Raphael Gabriel Geronimo</div>
+            <div><div class="type" style="font-size: 12px; letter-spacing: .24em; color: #8E8B84">WRITTEN, DESIGNED &amp; BUILT BY</div>Raphael Gabriel Geronimo</div>
+            <div><div class="type" style="font-size: 12px; letter-spacing: .24em; color: #8E8B84">FRONT END · BACK END · DEPLOYMENT</div>Also Raphael</div>
+            <div><div class="type" style="font-size: 12px; letter-spacing: .24em; color: #8E8B84">STUNTS</div>GERONIMO!</div>
+            <div><div class="type" style="font-size: 12px; letter-spacing: .24em; color: #8E8B84">CATERING</div>Gab-urrito</div>
+            <div><div class="type" style="font-size: 12px; letter-spacing: .24em; color: #8E8B84">NO BUGS WERE HARMED</div>in the making of this portfolio</div>
+          </div>
+          <div style="border: 3px double #D9D6CC; padding: 28px 24px; display: flex; flex-direction: column; gap: 12px; align-items: center; background: #0B0B0B">
+            <span class="type" style="font-size: 13px; letter-spacing: .24em; color: #BDBAB0">FOR THE SEQUEL, CONTACT</span>
+            <a href="#contact" class="serif" style="font-size: clamp(22px, 3vw, 30px); font-weight: 700; text-underline-offset: 6px">⟦email⟧</a>
+            <div class="type" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 22px; font-size: 15px"><a href="#contact">GitHub</a><a href="#contact">LinkedIn</a><a href="#contact">⟦company.siteLabel⟧</a></div>
+            <span class="deco" style="font-size: 28px; margin-top: 8px">The End</span>
+            <span class="type" style="font-size: 12px; color: #8E8B84">© Raphael Gabriel Geronimo</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- film artefacts -->
+      <div aria-hidden="true" style="position: absolute; inset: -40px; pointer-events: none; opacity: .16; mix-blend-mode: screen; transform: translate({{gx}}px, {{gy}}px); background-image: url(&quot;data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 1.6 -.5'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>&quot;)"></div>
+      <div aria-hidden="true" style="position: absolute; top: 0; bottom: 0; left: {{scratchX}}%; width: 1px; background: rgba(242,240,234,.35); opacity: {{scratchOp}}; pointer-events: none"></div>
+      <div aria-hidden="true" style="position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse at 50% 50%, transparent 55%, rgba(0,0,0,.75) 100%); opacity: {{flick}}"></div>
+    </div>
+
+    <!-- THE FILM STRIP (controls) -->
+    <div class="strip" style="flex: none; padding: 22px 16px; display: flex; align-items: center; gap: 14px">
+      <button type="button" class="ctl" onClick="{{toggle}}" aria-label="{{playLabel}}">{{playIcon}}</button>
+      <button type="button" class="ctl" onClick="{{prev}}" aria-label="Previous scene">‹</button>
+      <div style="flex: 1; overflow-x: auto; display: flex; gap: 8px; padding: 2px 0">
+        <sc-for list="{{frames}}" as="f" hint-placeholder-count="10">
+          <button type="button" class="frame {{f.cls}}" onClick="{{f.go}}" aria-label="{{f.aria}}">{{f.label}}</button>
+        </sc-for>
+      </div>
+      <button type="button" class="ctl" onClick="{{next}}" aria-label="Next scene">›</button>
+      <span class="type" style="flex: none; font-size: 13px; color: #BDBAB0; min-width: 92px; text-align: right">SCENE {{sceneNo}}/10</span>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1000}}'>
+class Component extends DCLogic {
+  scenes() {
+    return [
+      { label: 'Leader', dur: 3000 },
+      { label: 'RGG Pictures', dur: 2600 },
+      { label: 'Title', dur: 4200 },
+      { label: 'The night', dur: 5200 },
+      { label: 'Case 01', dur: 7500 },
+      { label: 'Case 02', dur: 7500 },
+      { label: 'Case 03', dur: 7500 },
+      { label: 'The cast', dur: 7000 },
+      { label: 'The studio', dur: 5500 },
+      { label: 'Credits', dur: 0 }
+    ];
+  }
+  componentDidMount() {
+    this.t = 0;
+    this.timer = setInterval(() => this.tick(), 40);
+  }
+  componentWillUnmount() { clearInterval(this.timer); }
+  tick() {
+    const s = this.state || {};
+    const playing = s.playing !== false;
+    const sc = s.scene || 0;
+    const list = this.scenes();
+    this.f = (this.f || 0) + 1;
+    if (playing) {
+      this.t += 40;
+      const dur = list[sc].dur;
+      if (dur && this.t >= dur) { this.t = 0; this.setState({ scene: sc + 1 }); return; }
+    }
+    // grain + flicker every tick, a scratch now and then
+    const g = { gx: Math.round(Math.random() * 40 - 20), gy: Math.round(Math.random() * 40 - 20), flick: (0.82 + Math.random() * 0.18).toFixed(2) };
+    if (Math.random() < 0.06) { g.scratchX = Math.round(Math.random() * 100); g.scratchOp = 1; } else g.scratchOp = 0;
+    this.setState(g);
+  }
+  go(i) {
+    const n = this.scenes().length;
+    const k = Math.max(0, Math.min(n - 1, i));
+    this.t = 0;
+    this.setState({ scene: k });
+  }
+  renderVals() {
+    const s = this.state || {};
+    const sc = s.scene || 0;
+    const list = this.scenes();
+    const playing = s.playing !== false;
+    const vis = (i) => i === sc
+      ? 'clip-path: circle(120% at 50% 50%); opacity: 1; pointer-events: auto'
+      : 'clip-path: circle(0% at 50% 50%); opacity: 0; pointer-events: none';
+    const sv = {}, hid = {};
+    [0, 1, 2, 3, 7, 8, 9].forEach((i) => { sv['s' + i] = vis(i); hid['s' + i] = i === sc ? 'false' : 'true'; });
+    const subs = ['“[One line on the problem, told like a detective.]”', '“[The twist: what made it hard.]”', '“[How it ended. Spoiler: it shipped.]”'];
+    const kinds = ['⟦p0.type⟧', '⟦p1.type⟧', '⟦p2.type⟧'];
+    const cases = [0, 1, 2].map((k) => {
+      const i = 4 + k;
+      const full = subs[k];
+      const shown = i === sc ? full.slice(0, Math.min(full.length, Math.floor(Math.max(0, this.t - 900) / 32))) : '';
+      return { i: k, sv: vis(i), hid: i === sc ? 'false' : 'true', no: 'CASE No. 0' + (k + 1), kind: kinds[k], sub: shown || ' ' };
+    });
+    const leaderT = sc === 0 ? this.t : 0;
+    const leaderN = Math.max(1, 3 - Math.floor(leaderT / 1000));
+    const rolling = sc === 9;
+    return {
+      sv: sv, hid: hid, cases: cases,
+      sweep: Math.round(((leaderT % 1000) / 1000) * 360),
+      leader: String(leaderN),
+      rollY: rolling ? '0px' : 'calc(100% + 90vh)',
+      rollT: rolling ? '9s cubic-bezier(.2,.4,.3,1) .6s' : '0s',
+      gx: s.gx || 0, gy: s.gy || 0,
+      flick: s.flick || 0.9,
+      scratchX: s.scratchX || 30, scratchOp: s.scratchOp || 0,
+      toggle: () => this.setState({ playing: !playing }),
+      playIcon: playing ? 'Pause' : 'Play',
+      playLabel: playing ? 'Pause the film' : 'Play the film',
+      prev: () => this.go(sc - 1),
+      next: () => this.go(sc + 1),
+      sceneNo: String(sc + 1),
+      frames: list.map((x, i) => ({ label: x.label, cls: i === sc ? 'on' : '', aria: 'Go to scene ' + (i + 1) + ': ' + x.label, go: () => this.go(i) }))
+    };
+  }
+}
+</script>
+</body>
+</html>

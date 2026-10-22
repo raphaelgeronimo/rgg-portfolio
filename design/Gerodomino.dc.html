@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Gero-domino — Raphael Gabriel Geronimo</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@500;700;800;900&amp;family=DM+Sans:wght@400;500;700&amp;display=swap">
+<style>
+body{margin:0;background:#F5F1E8}
+a{color:#111111}a:hover{color:#E4252B}
+.dom{position:absolute;bottom:0;width:24px;height:56px;border-radius:5px;transform-origin:100% 100%;transition:transform .26s cubic-bezier(.55,0,.9,.55);box-shadow:inset 0 0 0 2px rgba(255,255,255,.08)}
+.dom::before{content:"";position:absolute;left:4px;right:4px;top:27px;height:2px;background:rgba(245,241,232,.55)}
+.dom::after{content:"";position:absolute;left:50%;top:10px;width:6px;height:6px;margin-left:-3px;border-radius:50%;background:rgba(245,241,232,.8);box-shadow:0 26px 0 rgba(245,241,232,.8)}
+.dom.lg::after{display:none}
+.dom.lg::before{top:calc(50% - 2px);height:4px}
+.g{position:absolute;bottom:123px;transform-origin:50% 100%;z-index:2}
+.gin{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .8s cubic-bezier(.3,1.35,.5,1) .28s}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:24px;border:4px solid #111111;box-sizing:border-box;display:flex;flex-direction:column;overflow:hidden;background:#111111;color:#F5F1E8;box-shadow:inset 0 0 0 7px #111111,inset 0 0 0 9px rgba(245,241,232,.35)}
+.face.front{transform:rotateY(180deg)}
+.face.gco{box-shadow:inset 0 0 0 7px #111111,inset 0 0 0 9px #E4252B}
+.face.gct{background:#E4252B;color:#FFFFFF;box-shadow:inset 0 0 0 7px #E4252B,inset 0 0 0 9px rgba(255,255,255,.5)}
+.face .half{flex:1;padding:20px 22px;display:flex;flex-direction:column;justify-content:center;gap:8px;min-height:0}
+.face .mid{flex:none;position:relative;height:3px;background:#F5F1E8;margin:0 18px}
+.face .mid::after{content:"";position:absolute;left:50%;top:50%;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;background:#E4252B;border:2px solid #F5F1E8}
+.face.gct .mid::after{background:#111111}
+.pips{flex:none;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(3,1fr);width:120px;height:120px;gap:10px}
+.pips i{display:block;border-radius:50%;background:#F5F1E8}
+.pips i.r{background:#E4252B}
+.a1{grid-area:1/1}.a2{grid-area:1/2}.a3{grid-area:1/3}.b1{grid-area:2/1}.b2{grid-area:2/2}.b3{grid-area:2/3}.c1{grid-area:3/1}.c2{grid-area:3/2}.c3{grid-area:3/3}
+.race{font-family:'Rubik',sans-serif;font-weight:700;font-size:14px;background:transparent;color:#F5F1E8;border:2px solid rgba(245,241,232,.6);border-radius:10px;padding:10px 14px;cursor:pointer;min-height:44px}
+.race:hover{border-color:#E4252B;color:#FF8A8E}
+.lnk{color:#FF8A8E;font-weight:700}
+.face.gct .lnk,.face.gct .lbl{color:#FFFFFF}
+.ttl{font-family:'Rubik',sans-serif;font-weight:800;font-size:24px;line-height:1.05;margin:0}
+.lbl{font-family:'Rubik',sans-serif;font-weight:700;font-size:12px;letter-spacing:.16em;color:#FF8A8E}
+.shot{height:72px;border-radius:10px;background:#2A2A2A;color:#BDBDBD;display:flex;align-items:center;justify-content:center;font-size:14px}
+.body{margin:0;font-size:15px;line-height:1.45}
+.push{font-family:'Rubik',sans-serif;font-weight:800;font-size:17px;background:#E4252B;color:#FFFFFF;border:3px solid #111111;border-radius:12px;padding:12px 22px;cursor:pointer;box-shadow:0 5px 0 #111111;min-height:52px;min-width:200px;transition:transform .08s ease}
+.push:active{transform:translateY(3px);box-shadow:0 2px 0 #111111}
+.ghost{font-family:'Rubik',sans-serif;font-weight:700;font-size:15px;background:#F5F1E8;color:#111111;border:2.5px solid #111111;border-radius:12px;padding:10px 16px;cursor:pointer;min-height:52px}
+.chip{font-family:'Rubik',sans-serif;font-weight:800;font-size:13px;width:30px;height:40px;border-radius:7px;border:2.5px solid #111111;cursor:pointer;padding:0;display:flex;align-items:center;justify-content:center}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #F5F1E8; color: #111111; font-family: 'DM Sans', system-ui, sans-serif">
+
+  <div style="background: #111111; color: #F5F1E8; font-size: 14px; padding: 10px 24px; display: flex; flex-wrap: wrap; gap: 8px 20px; justify-content: center; align-items: center; font-weight: 700">
+    <span>Theme: Gero-domino</span>
+    <a href="Default.dc.html" style="color: #FF8A8E; padding: 6px 0">Switch to professional</a>
+    <a href="Main.dc.html" style="color: #FF8A8E; padding: 6px 0">Deal again</a>
+  </div>
+
+  <section ref="{{stageRef}}" aria-label="Chain reaction" style="position: relative; height: calc(100vh - 44px); min-height: 640px; max-height: 1000px; overflow: hidden; background-color: #F5F1E8; background-image: linear-gradient(90deg, rgba(17,17,17,.05) 1px, transparent 1px); background-size: 120px 100%; background-position: {{bgX}}px 0">
+
+    <!-- HUD: stops -->
+    <div style="position: absolute; left: 0; right: 0; top: 0; z-index: 6; padding: 14px 24px; display: flex; flex-wrap: wrap; gap: 10px 24px; align-items: center; justify-content: space-between">
+      <span style="font-family: 'Rubik', sans-serif; font-weight: 900; font-size: 22px">GERO<span style="color: #E4252B">·</span>DOMINO</span>
+      <div style="display: flex; align-items: center; gap: 8px">
+        <sc-for list="{{chips}}" as="d" hint-placeholder-count="6">
+          <button type="button" class="chip" onClick="{{d.go}}" aria-label="{{d.label}}" title="{{d.label}}" style="background: {{d.bg}}; color: {{d.fg}}">{{d.num}}</button>
+        </sc-for>
+        <span style="font-family: 'Rubik', sans-serif; font-weight: 700; font-size: 13px; margin-left: 6px; min-width: 92px">{{fallen}} / {{total}} DOWN</span>
+      </div>
+    </div>
+
+    <!-- WORLD -->
+    <div style="position: absolute; left: 0; top: 0; bottom: 0; width: {{worldW}}px; transform: translateX(-{{cam}}px); transition: transform {{camT}}">
+      <div aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: 120px; height: 3px; background: #111111"></div>
+      <div aria-hidden="true" style="position: absolute; left: 0; right: 0; bottom: 0; height: 120px; background: repeating-linear-gradient(90deg, #E9E2D2 0 80px, #E1D8C5 80px 160px)"></div>
+
+      <!-- intro -->
+      <div style="position: absolute; left: 6vw; bottom: 190px; width: min(560px, 82vw); display: flex; flex-direction: column; gap: 16px">
+        <span class="lbl" style="color: #E4252B">FULL-STACK DEVELOPER · FOUNDER · CHAIN-REACTION SPECIALIST</span>
+        <h1 style="margin: 0; font-family: 'Rubik', sans-serif; font-weight: 900; font-size: clamp(60px, 9vw, 130px); line-height: 0.86; letter-spacing: -0.04em">Gero-<br>domino<span style="color: #E4252B">.</span></h1>
+        <p style="margin: 0; font-size: 20px; line-height: 1.55; max-width: 480px">Raphael Gabriel Geronimo. One good idea knocks over the next. Six giant tiles are waiting face-down down the line. Push the first one.</p>
+      </div>
+
+      <!-- giant tiles: face-down in the line, flip face-up when the chain hits them -->
+      <div class="g" style="left: {{gx.g1}}px; width: {{gw}}px; height: {{gh}}px; transform: {{gt.g1}}; transition: transform {{gtr.g1}}">
+        <div class="gin" style="transform: rotateY({{gf.g1}}deg)">
+          <div class="face back" aria-hidden="{{gb.g1}}">
+            <div class="half" style="align-items: center"><div class="pips big" aria-hidden="true"><i class="b2 r"></i></div></div>
+            <div class="mid" aria-hidden="true"></div>
+            <div class="half" style="align-items: center; text-align: center">
+              <span class="lbl" style="color: #F5F1E8">TILE 1 · FACE DOWN</span>
+              <button type="button" class="race" onClick="{{gr.g1}}">Race the chain here</button>
+            </div>
+          </div>
+          <article class="face front" aria-hidden="{{ga.g1}}">
+            <div class="half"><span class="lbl">TILE 1 · ⟦p0.type|up⟧</span><h2 class="ttl">⟦p0.name⟧</h2><div class="shot">⟦p0.shot⟧</div></div>
+            <div class="mid" aria-hidden="true"></div>
+            <div class="half"><p class="body">⟦p0.summary⟧</p><a href="#work" class="lnk">See the build →</a></div>
+          </article>
+        </div>
+      </div>
+      <div class="g" style="left: {{gx.g2}}px; width: {{gw}}px; height: {{gh}}px; transform: {{gt.g2}}; transition: transform {{gtr.g2}}">
+        <div class="gin" style="transform: rotateY({{gf.g2}}deg)">
+          <div class="face back" aria-hidden="{{gb.g2}}">
+            <div class="half" style="align-items: center"><div class="pips big" aria-hidden="true"><i class="a1"></i><i class="c3"></i></div></div>
+            <div class="mid" aria-hidden="true"></div>
+            <div class="half" style="align-items: center; text-align: center">
+              <span class="lbl" style="color: #F5F1E8">TILE 2 · FACE DOWN</span>
+              <button type="button" class="race" onClick="{{gr.g2}}">Race the chain here</button>
+            </div>
+          </div>
+          <article class="face front" aria-hidden="{{ga.g2}}">
+            <div class="half"><span class="lbl">TILE 2 · ⟦p1.type|up⟧</span><h2 class="ttl">⟦p1.name⟧</h2><div class="shot">⟦p1.shot⟧</div></div>
+            <div class="mid" aria-hidden="true"></div>
+            <div class="half"><p class="body">⟦p1.summary⟧ It knocked over the next one.</p><a href="#work" class="lnk">See the build →</a></div>
+          </article>
+        </div>
+      </div>
+      <div class="g" style="left: {{gx.g3}}px; width: {{gw}}px; height: {{gh}}px; transform: {{gt.g3}}; transition: transform {{gtr.g3}}">
+        <div class="gin" style="transform: rotateY({{gf.g3}}deg)">
+          <div class="face back" aria-hidden="{{gb.g3}}">
+            <div class="half" style="align-items: center"><div class="pips big" aria-hidden="true"><i class="a1"></i><i class="b2"></i><i class="c3"></i></div></div>
+            <div class="mid" aria-hidden="true"></div>
+            <div class="half" style="align-items: center; text-align: center">
+              <span class="lbl" style="color: #F5F1E8">TILE 3 · FACE DOWN</span>
+              <button type="button" class="race" onClick="{{gr.g3}}">Race the chain here</button>
+            </div>
+          </div>
+          <article class="face front" aria-hidden="{{ga.g3}}">
+            <div class="half"><span class="lbl">TILE 3 · ⟦p2.type|up⟧</span><h2 class="ttl">⟦p2.name⟧</h2><div class="shot">⟦p2.shot⟧</div></div>
+            <div class="mid" aria-hidden="true"></div>
+            <div class="half"><p class="body">⟦p2.summary⟧</p><a href="#work" class="lnk">See the build →</a></div>
+          </article>
+        </div>
+      </div>
+      <div class="g" style="left: {{gx.g4}}px; width: {{gw}}px; height: {{gh}}px; transform: {{gt.g4}}; transition: transform {{gtr.g4}}">
+        <div class="gin" style="transform: rotateY({{gf.g4}}deg)">
+          <div class="face back" aria-hidden="{{gb.g4}}">
+            <div class="half" style="align-items: center"><div class="pips big" aria-hidden="true"><i class="a1"></i><i class="a3"></i><i class="c1"></i><i class="c3"></i></div></div>
+            <div class="mid" aria-hidden="true"></div>
+            <div class="half" style="align-items: center; text-align: center">
+              <span class="lbl" style="color: #F5F1E8">TILE 4 · FACE DOWN</span>
+              <button type="button" class="race" onClick="{{gr.g4}}">Race the chain here</button>
+            </div>
+          </div>
+          <article class="face front" aria-hidden="{{ga.g4}}">
+            <div class="half"><span class="lbl">TILE 4 · THE SET</span><h2 class="ttl">What keeps the chain going</h2></div>
+            <div class="mid" aria-hidden="true"></div>
+            <div class="half"><div class="body"><b>Front end</b> — ⟦skills.frontend⟧</div><div class="body"><b>Back end</b> — ⟦skills.backend⟧</div><div class="body"><b>Business</b> — ⟦skills.business⟧</div><p class="body" style="opacity:.7;font-size:14px">Lines everything up carefully, then enjoys the fall.</p></div>
+          </article>
+        </div>
+      </div>
+      <div class="g" style="left: {{gx.g5}}px; width: {{gw}}px; height: {{gh}}px; transform: {{gt.g5}}; transition: transform {{gtr.g5}}">
+        <div class="gin" style="transform: rotateY({{gf.g5}}deg)">
+          <div class="face back gco" aria-hidden="{{gb.g5}}">
+            <div class="half" style="align-items: center"><div class="pips big" aria-hidden="true"><i class="a1"></i><i class="a3"></i><i class="b2"></i><i class="c1"></i><i class="c3"></i></div></div>
+            <div class="mid" aria-hidden="true"></div>
+            <div class="half" style="align-items: center; text-align: center">
+              <span class="lbl" style="color: #F5F1E8">TILE 5 · FACE DOWN</span>
+              <button type="button" class="race" onClick="{{gr.g5}}">Race the chain here</button>
+            </div>
+          </div>
+          <article class="face front gco" aria-hidden="{{ga.g5}}">
+            <div class="half"><span class="lbl">TILE 5 · FOUNDER OF</span><h2 class="ttl">⟦company.name⟧</h2><p class="body">⟦company.summary⟧</p></div>
+            <div class="mid" aria-hidden="true"></div>
+            <div class="half"><a href="#venture" class="lnk">Pull up a chair →</a></div>
+          </article>
+        </div>
+      </div>
+      <div class="g" style="left: {{gx.g6}}px; width: {{gw}}px; height: {{gh}}px; transform: {{gt.g6}}; transition: transform {{gtr.g6}}">
+        <div class="gin" style="transform: rotateY({{gf.g6}}deg)">
+          <div class="face back gct" aria-hidden="{{gb.g6}}">
+            <div class="half" style="align-items: center"><div class="pips big" aria-hidden="true"><i class="a1"></i><i class="a3"></i><i class="b1"></i><i class="b3"></i><i class="c1"></i><i class="c3"></i></div></div>
+            <div class="mid" aria-hidden="true"></div>
+            <div class="half" style="align-items: center; text-align: center">
+              <span class="lbl" style="color: #F5F1E8">TILE 6 · FACE DOWN</span>
+              <button type="button" class="race" onClick="{{gr.g6}}">Race the chain here</button>
+            </div>
+          </div>
+          <article class="face front gct" aria-hidden="{{ga.g6}}">
+            <div class="half"><span class="lbl">TILE 6 · YOUR MOVE</span><h2 class="ttl">Start the next chain reaction.</h2></div>
+            <div class="mid" aria-hidden="true"></div>
+            <div class="half"><a href="#contact" class="lnk" style="font-size:20px">⟦email⟧</a><div style="display:flex;flex-wrap:wrap;gap:8px 16px"><a href="#contact" class="lnk">GitHub</a><a href="#contact" class="lnk">LinkedIn</a><a href="#contact" class="lnk">⟦company.siteLabel⟧</a></div><span style="font-size:13px;opacity:.8">© Raphael Gabriel Geronimo</span></div>
+          </article>
+        </div>
+      </div>
+
+      <!-- dominoes -->
+      <div aria-hidden="true" style="position: absolute; left: 0; bottom: 123px; height: 110px; width: {{worldW}}px; z-index: 3; pointer-events: none">
+        <sc-for list="{{doms}}" as="d" hint-placeholder-count="40">
+          <div class="dom {{d.cls}}" style="left: {{d.x}}px; height: {{d.h}}px; width: {{d.w}}px; background: {{d.c}}; transform: rotate({{d.r}}deg)"></div>
+        </sc-for>
+      </div>
+    </div>
+
+    <!-- controls: always on screen -->
+    <div style="position: absolute; left: 0; right: 0; bottom: 30px; z-index: 6; display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; justify-content: center; padding: 0 16px">
+      <button type="button" class="push" onClick="{{primary}}">{{primaryLabel}}</button>
+      <sc-if value="{{canReset}}" hint-placeholder-val="{{false}}"><button type="button" class="ghost" onClick="{{reset}}">Set them up again</button></sc-if>
+      <span aria-live="polite" style="font-family: 'Rubik', sans-serif; font-weight: 700; font-size: 14px; background: #F5F1E8; border: 2.5px solid #111111; border-radius: 10px; padding: 8px 12px">{{status}}</span>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1000}}'>
+class Component extends DCLogic {
+  cfg() {
+    if (this._cfg) return this._cfg;
+    const before = [18, 10, 10, 10, 10, 10];
+    const ramp = [76, 102, 136, 180, 236];
+    const pieces = [], gi = [];
+    before.forEach((cnt, k) => {
+      for (let i = 0; i < cnt; i++) pieces.push({ kind: 's', h: 56 });
+      ramp.forEach((h) => pieces.push({ kind: 'r', h: h }));
+      gi.push(pieces.length);
+      pieces.push({ kind: 'g', k: k });
+    });
+    const names = ['Project 1', 'Project 2', 'Project 3', 'The set', 'Company', 'Contact'];
+    this._cfg = { pieces: pieces, gi: gi, names: names, N: pieces.length, Gw: 300 };
+    return this._cfg;
+  }
+  layout(H) {
+    const c = this.cfg();
+    const Gh = Math.max(360, Math.min(440, H - 123 - 96));
+    let x = 760;
+    const xs = [], ws = [];
+    c.pieces.forEach((p) => {
+      const w = p.kind === 'g' ? c.Gw : (p.kind === 'r' ? Math.round(p.h * 0.43) : 24);
+      xs.push(x); ws.push(w);
+      x += w + (p.kind === 'g' ? 90 : (p.kind === 'r' ? Math.round(p.h * 0.36) : 20));
+    });
+    return { Gh: Gh, xs: xs, ws: ws, worldW: x + 500 };
+  }
+  componentDidMount() { this.timer = setInterval(() => this.tick(), 40); }
+  componentWillUnmount() { clearInterval(this.timer); clearTimeout(this.wobT); }
+  hitGiant(k, n) {
+    const c = this.cfg();
+    this.setState({ n: n, mode: k === 5 ? 'done' : 'wait', view: k, target: -1, wob: k });
+    clearTimeout(this.wobT);
+    this.wobT = setTimeout(() => this.setState({ wob: -1 }), 220);
+  }
+  tick() {
+    const s = this.state || {};
+    const mode = s.mode || 'idle';
+    if (mode !== 'run' && mode !== 'ff') return;
+    const c = this.cfg();
+    let n = s.n || 0;
+    const steps = mode === 'ff' ? 3 : 1;
+    if (mode === 'run') {
+      const p = c.pieces[n];
+      const need = p ? Math.round(70 * Math.sqrt(p.h ? p.h / 56 : 1)) : 70;
+      this.acc = (this.acc || 0) + 40;
+      if (this.acc < need) return;
+      this.acc = 0;
+    }
+    for (let i = 0; i < steps; i++) {
+      const p = c.pieces[n];
+      if (!p) break;
+      if (p.kind === 'g' && (mode === 'run' || p.k === s.target || p.k === 5)) { this.hitGiant(p.k, n); return; }
+      n += 1;
+    }
+    this.setState({ n: n });
+  }
+  goStop(k) {
+    const s = this.state || {};
+    const c = this.cfg();
+    const n = s.n || 0;
+    if (n >= c.gi[k]) {
+      const mode = s.mode === 'run' || s.mode === 'ff' ? 'paused' : (s.mode || 'idle');
+      this.setState({ view: k, mode: mode });
+    } else {
+      this.setState({ mode: 'ff', target: k, view: -1 });
+    }
+  }
+  renderVals() {
+    const s = this.state || {};
+    const c = this.cfg();
+    const n = s.n || 0;
+    const mode = s.mode || 'idle';
+    const view = s.view === undefined ? -1 : s.view;
+    const W = (this.stage && this.stage.clientWidth) || 1280;
+    const H = (this.stage && this.stage.clientHeight) || 877;
+    const L = this.layout(H);
+    const maxCam = Math.max(0, L.worldW - W);
+    const clamp = (v) => Math.min(maxCam, Math.max(0, v));
+    let cam;
+    if (view >= 0) { const gx = L.xs[c.gi[view]]; cam = clamp(gx + c.Gw / 2 - W * (W > 760 ? 0.58 : 0.5)); }
+    else cam = n === 0 ? 0 : clamp(L.xs[Math.min(n, c.N - 1)] - W * 0.55);
+
+    const fallen = (i) => {
+      const p = c.pieces[i];
+      if (p.kind === 'g') return n > i && view !== p.k;
+      return n > i;
+    };
+    const doms = [];
+    c.pieces.forEach((p, i) => {
+      if (p.kind === 'g') return;
+      let r = 0;
+      if (n > i) {
+        if (p.kind === 's') r = 72;
+        else r = fallen(i + 1) ? 58 : 21;
+      }
+      doms.push({ x: L.xs[i], w: L.ws[i], h: p.h, c: p.kind === 'r' ? '#E4252B' : '#111111', cls: p.kind === 'r' ? 'lg' : '', r: r });
+    });
+    const gx = {}, gt = {}, gtr = {}, gf = {}, ga = {}, gb = {}, gr = {};
+    c.gi.forEach((idx, k) => {
+      const key = 'g' + (k + 1);
+      const isDown = fallen(idx);
+      const up = n >= idx;
+      const wob = s.wob === k;
+      gx[key] = L.xs[idx];
+      gt[key] = 'perspective(1400px) rotateX(' + (isDown ? 84 : 0) + 'deg) rotate(' + (wob ? 3.5 : 0) + 'deg)';
+      gtr[key] = isDown ? '.75s cubic-bezier(.55,0,.8,.3)' : (wob ? '.12s ease-out' : '.5s cubic-bezier(.3,1.4,.5,1)');
+      gf[key] = up ? 180 : 0;
+      ga[key] = up && !isDown ? 'false' : 'true';
+      gb[key] = up ? 'true' : 'false';
+      gr[key] = () => this.goStop(k);
+    });
+
+    const reached = (k) => n >= c.gi[k];
+    const chips = c.names.map((name, k) => ({
+      num: String(k + 1), go: () => this.goStop(k),
+      label: (reached(k) ? 'Show tile ' : 'Race the chain to tile ') + (k + 1) + ': ' + name,
+      bg: view === k ? '#111111' : (reached(k) ? '#E4252B' : '#F5F1E8'),
+      fg: view === k || reached(k) ? '#FFFFFF' : '#111111'
+    }));
+    const curK = c.gi.indexOf(n);
+    const reset = () => { this.acc = 0; this.setState({ n: 0, mode: 'idle', view: -1, target: -1, wob: -1 }); };
+    let primaryLabel = 'Push the first one', status = 'Six tiles, face-down.';
+    let primary = () => { this.acc = 0; this.setState({ mode: 'run', view: -1, target: -1 }); };
+    if (mode === 'run' || mode === 'ff') {
+      primaryLabel = 'Pause';
+      status = mode === 'ff' ? 'Racing to tile ' + (s.target + 1) + '…' : 'Falling…';
+      primary = () => this.setState({ mode: 'paused' });
+    } else if (mode === 'wait' && curK >= 0 && view !== curK) {
+      primaryLabel = 'Back to tile ' + (curK + 1);
+      status = view >= 0 ? 'Tile ' + (view + 1) + ' · ' + c.names[view] : 'Waiting';
+      primary = () => this.setState({ view: curK });
+    } else if (mode === 'wait') {
+      primaryLabel = 'Knock it over';
+      status = 'Tile ' + (view + 1) + ' of 6 · ' + c.names[view];
+      primary = () => { this.acc = 0; this.setState({ mode: 'run', view: -1, n: n + 1 }); };
+    } else if (mode === 'done') {
+      primaryLabel = 'Set them up again';
+      status = 'All ' + c.N + ' down · ' + (view >= 0 ? c.names[view] : 'nice');
+      primary = reset;
+    } else if (n > 0) {
+      primaryLabel = 'Keep it going';
+      status = view >= 0 ? 'Tile ' + (view + 1) + ' · ' + c.names[view] : 'Paused';
+    }
+    return {
+      worldW: L.worldW,
+      cam: Math.round(cam),
+      camT: mode === 'ff' ? '.12s linear' : (mode === 'run' ? '.35s linear' : '.9s cubic-bezier(.3,.8,.3,1)'),
+      bgX: Math.round(-cam * 0.5),
+      doms: doms, chips: chips,
+      gw: c.Gw, gh: L.Gh, gx: gx, gt: gt, gtr: gtr, gf: gf, ga: ga, gb: gb, gr: gr,
+      fallen: Math.min(n, c.N), total: c.N,
+      primaryLabel: primaryLabel, primary: primary, status: status,
+      canReset: n > 0 && mode !== 'done',
+      reset: reset,
+      stageRef: (el) => { this.stage = el; }
+    };
+  }
+}
+</script>
+</body>
+</html>

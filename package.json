@@ -1,0 +1,28 @@
+{
+  "name": "rgg-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Raphael Gabriel Geronimo's portfolio: pick a card, and the whole site becomes a different Raphael.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "convert": "node scripts/convert.js design components/themes scripts/routes.json"
+  },
+  "dependencies": {
+    "@sanity/client": "8.9.0",
+    "@sanity/vision": "6.17.0",
+    "next": "16.3.8",
+    "next-sanity": "13.3.4",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "sanity": "6.17.0",
+    "styled-components": "6.5.3"
+  },
+  "devDependencies": {
+    "htmlparser2": "9.1.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

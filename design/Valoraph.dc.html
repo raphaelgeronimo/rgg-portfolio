@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>VALO-RAPH — Raphael Gabriel Geronimo</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&amp;family=Barlow:wght@400;500;600&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap">
+<style>
+body{margin:0;background:#0E161F}
+a{color:#EDE6DA}a:hover{color:#FF4B5C}
+.cond{font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:.04em}
+.mono{font-family:'JetBrains Mono',monospace}
+.grid-bg{background-color:#0E161F;background-image:linear-gradient(rgba(237,230,218,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(237,230,218,.04) 1px,transparent 1px),radial-gradient(ellipse at 80% -10%,rgba(255,75,92,.14),transparent 55%);background-size:64px 64px,64px 64px,100% 100%}
+.cut{clip-path:polygon(0 0,calc(100% - 16px) 0,100% 16px,100% 100%,16px 100%,0 calc(100% - 16px))}
+.cut-s{clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px))}
+.phase{display:inline-flex;align-items:center;gap:10px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:16px;letter-spacing:.12em;text-transform:uppercase;background:transparent;color:#8A96A3;border:0;border-bottom:3px solid transparent;padding:12px 6px;cursor:pointer;min-height:48px}
+.phase.on{color:#EDE6DA;border-bottom-color:#FF4B5C}
+.phase .n{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border:1.5px solid currentColor;font-size:13px}
+.item{display:flex;flex-direction:column;gap:6px;text-align:left;font:inherit;color:#EDE6DA;background:#16212C;border:1.5px solid #243241;padding:14px;cursor:pointer;min-height:110px;position:relative;transition:border-color .15s,background .15s}
+.item:hover{border-color:#8A96A3}
+.item.owned{background:#1B2A36;border-color:#3FD5A6}
+.item.sel{box-shadow:inset 0 0 0 1.5px #EDE6DA}
+.item .cost{font-family:'JetBrains Mono',monospace;font-size:12px;color:#F2C46D}
+.item.owned .cost{color:#3FD5A6}
+.item .nm{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:22px;text-transform:uppercase;line-height:1}
+.item .ty{font-size:12px;color:#8A96A3;text-transform:uppercase;letter-spacing:.12em;font-family:'Barlow Condensed',sans-serif;font-weight:600}
+.vbtn{display:inline-flex;align-items:center;justify-content:center;gap:10px;box-sizing:border-box;line-height:1;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:19px;letter-spacing:.1em;text-transform:uppercase;min-height:54px;padding:0 28px;cursor:pointer;text-decoration:none;border:0}
+.vbtn.red{background:#FF4B5C;color:#0E161F}
+.vbtn.red:hover{background:#FF6E7C;color:#0E161F}
+.vbtn.line{background:transparent;color:#EDE6DA;box-shadow:inset 0 0 0 1.5px #4A5A6B}
+.vbtn.line:hover{box-shadow:inset 0 0 0 1.5px #EDE6DA;color:#EDE6DA}
+.site{position:relative;display:flex;flex-direction:column;gap:12px;background:#16212C;border:1.5px solid #243241;padding:18px;min-width:0}
+.site.done{border-color:#FF4B5C}
+.hold{position:relative;overflow:hidden;user-select:none;-webkit-user-select:none;touch-action:none}
+.hold .fill{position:absolute;left:0;top:0;bottom:0;background:#FF4B5C;opacity:.35;pointer-events:none}
+.row{display:grid;grid-template-columns:minmax(0,2.2fr) minmax(0,1.3fr) minmax(0,1fr) minmax(0,1fr);gap:12px;align-items:center;padding:14px 16px;border-bottom:1px solid #243241}
+@media (max-width:640px){.row{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.row .hide-s{display:none}}
+</style>
+</helmet>
+<div class="grid-bg" style="min-height: 100vh; color: #EDE6DA; font-family: 'Barlow', system-ui, sans-serif">
+
+  <div style="background: #FF4B5C; color: #0E161F; font-size: 14px; padding: 10px 24px; display: flex; flex-wrap: wrap; gap: 8px 20px; justify-content: center; align-items: center; font-weight: 600">
+    <span>Theme: VALO-RAPH</span>
+    <a href="Default.dc.html" style="color: #0E161F; padding: 6px 0">Switch to professional</a>
+    <a href="Main.dc.html" style="color: #0E161F; padding: 6px 0">Deal again</a>
+  </div>
+
+  <!-- HERO -->
+  <header id="top" style="max-width: 1200px; margin: 0 auto; padding: 48px 24px 24px; display: flex; flex-wrap: wrap; gap: 24px 40px; align-items: flex-end; justify-content: space-between">
+    <div style="display: flex; flex-direction: column; gap: 12px; min-width: 0">
+      <span class="cond" style="font-weight: 600; font-size: 15px; letter-spacing: .2em; color: #FF4B5C">Full-stack developer · founder · tech geek</span>
+      <h1 class="cond" style="margin: 0; font-weight: 800; font-size: clamp(72px, 12vw, 160px); line-height: .82; letter-spacing: .01em">VALO-<span style="color: #FF4B5C">RAPH</span></h1>
+      <p style="margin: 0; font-size: 19px; line-height: 1.55; max-width: 520px; color: #B8C2CC">Raphael Gabriel Geronimo. One round: buy the loadout, plant on every site, check the scoreboard.</p>
+    </div>
+    <svg viewBox="0 0 120 120" aria-hidden="true" style="width: 120px; height: 120px; flex: none">
+      <circle cx="60" cy="60" r="44" fill="none" stroke="#EDE6DA" stroke-width="2" opacity=".35"></circle>
+      <path d="M60 8 V40 M60 80 V112 M8 60 H40 M80 60 H112" stroke="#EDE6DA" stroke-width="4" stroke-linecap="square"></path>
+      <rect x="57" y="57" width="6" height="6" fill="#FF4B5C"></rect>
+    </svg>
+  </header>
+
+  <!-- ROUND HUD -->
+  <nav aria-label="Round phases" style="position: sticky; top: 0; z-index: 5; background: rgba(14,22,31,.92); border-top: 1px solid #243241; border-bottom: 1px solid #243241; backdrop-filter: blur(6px)">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; flex-wrap: wrap; gap: 4px 28px; align-items: center; justify-content: space-between">
+      <div style="display: flex; flex-wrap: wrap; gap: 4px 22px">
+        <sc-for list="{{phases}}" as="p" hint-placeholder-count="3">
+          <button type="button" class="phase {{p.cls}}" onClick="{{p.go}}" aria-current="{{p.cur}}"><span class="n">{{p.n}}</span>{{p.label}}</button>
+        </sc-for>
+      </div>
+      <div style="display: flex; gap: 18px; align-items: center">
+        <span class="mono" style="font-size: 13px; color: #8A96A3">ROUND 1</span>
+        <span class="mono" style="font-size: 20px; font-weight: 700; color: {{clockColor}}">{{clock}}</span>
+      </div>
+    </div>
+  </nav>
+
+  <main style="max-width: 1200px; margin: 0 auto; padding: 32px 24px 88px">
+
+    <!-- PHASE 1 · BUY (skills) -->
+    <sc-if value="{{isBuy}}" hint-placeholder-val="{{true}}">
+      <section id="about" aria-label="Buy phase: skills" style="display: flex; flex-direction: column; gap: 22px">
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 14px">
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <span class="cond" style="font-weight: 600; font-size: 14px; letter-spacing: .2em; color: #8A96A3">Buy phase · the skills</span>
+            <h2 class="cond" style="margin: 0; font-weight: 800; font-size: clamp(38px, 5vw, 60px); line-height: .95">Build the loadout.</h2>
+          </div>
+          <div class="cut-s" style="background: #16212C; padding: 12px 18px; display: flex; flex-direction: column; align-items: flex-end">
+            <span class="cond" style="font-weight: 600; font-size: 12px; letter-spacing: .2em; color: #8A96A3">Credits</span>
+            <span class="mono" style="font-size: 28px; font-weight: 700; color: #F2C46D">◈ {{credits}}</span>
+          </div>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 22px; align-items: flex-start">
+          <div style="flex: 2 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 18px">
+            <sc-for list="{{shop}}" as="g" hint-placeholder-count="3">
+              <div style="display: flex; flex-direction: column; gap: 8px">
+                <span class="cond" style="font-weight: 700; font-size: 14px; letter-spacing: .2em; color: {{g.color}}">{{g.title}}</span>
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 8px">
+                  <sc-for list="{{g.items}}" as="it" hint-placeholder-count="3">
+                    <button type="button" class="item cut-s {{it.cls}}" onClick="{{it.buy}}" aria-pressed="{{it.pressed}}"><span class="ty">{{it.ty}}</span><span class="nm">{{it.nm}}</span><span class="cost">{{it.cost}}</span></button>
+                  </sc-for>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+          <aside class="cut" aria-live="polite" style="flex: 1 1 300px; min-width: 0; background: #16212C; border-top: 3px solid #FF4B5C; padding: 20px; display: flex; flex-direction: column; gap: 12px">
+            <span class="cond" style="font-weight: 600; font-size: 13px; letter-spacing: .2em; color: #8A96A3">{{selType}}</span>
+            <span class="cond" style="font-weight: 800; font-size: 36px; line-height: 1">{{selName}}</span>
+            <p style="margin: 0; font-size: 16px; line-height: 1.55; color: #B8C2CC">{{selBody}}</p>
+            <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 4px">
+              <span class="cond" style="font-weight: 600; font-size: 12px; letter-spacing: .2em; color: #8A96A3">Loadout · {{ownedN}} equipped</span>
+              <div style="display: flex; flex-wrap: wrap; gap: 6px">
+                <sc-for list="{{loadout}}" as="l" hint-placeholder-count="3"><span class="mono" style="font-size: 12px; padding: 5px 8px; background: #0E161F; color: #3FD5A6; border: 1px solid #2B4A44">{{l.nm}}</span></sc-for>
+                <sc-if value="{{emptyLoadout}}" hint-placeholder-val="{{false}}"><span style="font-size: 14px; color: #8A96A3">Nothing yet. Click an item to buy it.</span></sc-if>
+              </div>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px">
+              <button type="button" class="vbtn red cut-s" onClick="{{toPlant}}">Ready up →</button>
+              <button type="button" class="vbtn line cut-s" onClick="{{buyAll}}">Buy everything</button>
+            </div>
+          </aside>
+        </div>
+      </section>
+    </sc-if>
+
+    <!-- PHASE 2 · PLANT (projects) -->
+    <sc-if value="{{isPlant}}" hint-placeholder-val="{{false}}">
+      <section id="work" aria-label="Plant phase: projects" style="display: flex; flex-direction: column; gap: 22px">
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 14px">
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <span class="cond" style="font-weight: 600; font-size: 14px; letter-spacing: .2em; color: #8A96A3">Round live · the projects</span>
+            <h2 class="cond" style="margin: 0; font-weight: 800; font-size: clamp(38px, 5vw, 60px); line-height: .95">Hold to plant on every site.</h2>
+          </div>
+          <span class="mono" style="font-size: 14px; color: #FF4B5C">{{plantedN}} / 3 SITES PLANTED</span>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px">
+          <sc-for list="{{sites}}" as="st" hint-placeholder-count="3">
+            <article class="site cut {{st.cls}}">
+              <div style="display: flex; justify-content: space-between; align-items: center">
+                <span class="cond" style="font-weight: 800; font-size: 64px; line-height: .8; color: {{st.letterColor}}">{{st.letter}}</span>
+                <span class="mono" style="font-size: 12px; color: {{st.statusColor}}">{{st.status}}</span>
+              </div>
+              <!-- the site: hidden until planted -->
+              <div class="cut-s" style="position: relative; height: 150px; background: #0E161F; overflow: hidden; display: flex; align-items: center; justify-content: center">
+                <div aria-hidden="true" style="position: absolute; inset: 0; background-image: linear-gradient(rgba(237,230,218,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(237,230,218,.06) 1px, transparent 1px); background-size: 20px 20px; opacity: {{st.gridOp}}"></div>
+                <span class="mono" style="position: relative; font-size: 13px; color: #8A96A3; opacity: {{st.shotOp}}; transition: opacity .4s">⟦p{st.i}.shot⟧</span>
+                <div aria-hidden="true" style="position: absolute; left: 50%; top: 50%; width: 84px; height: 84px; margin: -42px 0 0 -42px; border: 2px solid #FF4B5C; transform: rotate(45deg) scale({{st.markSc}}); opacity: {{st.markOp}}; transition: transform .4s cubic-bezier(.3,1.6,.5,1), opacity .3s"></div>
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 6px; opacity: {{st.infoOp}}; transition: opacity .4s">
+                <span class="cond" style="font-weight: 600; font-size: 13px; letter-spacing: .16em; color: #8A96A3">{{st.kind}}</span>
+                <h3 class="cond" style="margin: 0; font-weight: 800; font-size: 30px; line-height: 1">{{st.name}}</h3>
+                <p style="margin: 0; font-size: 15px; line-height: 1.5; color: #B8C2CC">{{st.body}}</p>
+                <sc-if value="{{st.planted}}" hint-placeholder-val="{{false}}"><a href="#work" style="font-weight: 600">See the project →</a></sc-if>
+              </div>
+              <sc-if value="{{st.canPlant}}" hint-placeholder-val="{{true}}">
+                <button type="button" class="vbtn line cut-s hold" onPointerDown="{{st.down}}" onPointerUp="{{st.up}}" onPointerLeave="{{st.up}}" onPointerCancel="{{st.up}}" onClick="{{st.click}}" aria-label="{{st.aria}}"><span class="fill" style="width: {{st.prog}}%"></span><span style="position: relative">{{st.holdLabel}}</span></button>
+              </sc-if>
+            </article>
+          </sc-for>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 10px; justify-content: space-between; align-items: center">
+          <button type="button" class="vbtn line cut-s" onClick="{{plantAll}}">Plant all instantly</button>
+          <button type="button" class="vbtn red cut-s" onClick="{{toEnd}}">End the round →</button>
+        </div>
+      </section>
+    </sc-if>
+
+    <!-- PHASE 3 · RESULT (company + contact) -->
+    <sc-if value="{{isEnd}}" hint-placeholder-val="{{false}}">
+      <section id="contact" aria-label="Round result and contact" style="display: flex; flex-direction: column; gap: 26px">
+        <div style="text-align: center; display: flex; flex-direction: column; gap: 6px; align-items: center; padding: 12px 0 6px">
+          <span class="cond" style="font-weight: 600; font-size: 15px; letter-spacing: .3em; color: #8A96A3">{{resultSub}}</span>
+          <h2 class="cond" style="margin: 0; font-weight: 800; font-size: clamp(64px, 11vw, 140px); line-height: .85; color: {{resultColor}}">{{resultTitle}}</h2>
+        </div>
+
+        <div class="cut" style="background: #16212C">
+          <div class="row cond" style="font-weight: 600; font-size: 13px; letter-spacing: .16em; color: #8A96A3"><span>Player</span><span>Role</span><span class="hide-s">Sites</span><span class="hide-s">Loadout</span></div>
+          <div class="row" style="background: rgba(255,75,92,.1); border-left: 4px solid #FF4B5C">
+            <span style="display: flex; flex-direction: column"><b class="cond" style="font-size: 22px; font-weight: 800">Raphael G. Geronimo</b><span style="font-size: 13px; color: #8A96A3">#RGG · ⟦city⟧</span></span>
+            <span class="cond" style="font-weight: 700; font-size: 18px">Full-stack</span>
+            <span class="mono hide-s" style="font-size: 15px">{{plantedN}} / 3</span>
+            <span class="mono hide-s" style="font-size: 15px">{{ownedN}} items</span>
+          </div>
+          <div class="row" style="color: #8A96A3">
+            <span style="display: flex; flex-direction: column"><b class="cond" style="font-size: 22px; font-weight: 700; color: #EDE6DA">Open slot</b><span style="font-size: 13px">waiting for a teammate</span></span>
+            <span class="cond" style="font-weight: 700; font-size: 18px">You?</span>
+            <span class="mono hide-s" style="font-size: 15px">–</span>
+            <a href="#contact" class="cond hide-s" style="font-weight: 700; font-size: 16px; color: #FF4B5C">Invite →</a>
+          </div>
+        </div>
+
+        <!-- sponsor = company, kept separate from the projects -->
+        <div id="venture" class="cut" style="background: #EDE6DA; color: #0E161F; padding: 22px 24px; display: flex; flex-wrap: wrap; gap: 14px 28px; align-items: center; justify-content: space-between">
+          <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0">
+            <span class="cond" style="font-weight: 600; font-size: 13px; letter-spacing: .2em; color: #5A6470">Team sponsor · founded by Raphael</span>
+            <span class="cond" style="font-weight: 800; font-size: clamp(32px, 4vw, 46px); line-height: 1">⟦company.name⟧</span>
+            <span style="font-size: 15px; line-height: 1.5">⟦company.summary⟧</span>
+          </div>
+          <a href="#venture" class="vbtn cut-s" style="background: #0E161F; color: #EDE6DA">Visit the store →</a>
+        </div>
+
+        <div class="cut" style="background: #16212C; border-top: 3px solid #FF4B5C; padding: 24px; display: flex; flex-wrap: wrap; gap: 18px 32px; align-items: center; justify-content: space-between">
+          <div style="display: flex; flex-direction: column; gap: 6px; min-width: 0">
+            <span class="cond" style="font-weight: 600; font-size: 13px; letter-spacing: .2em; color: #8A96A3">Add friend · queue up together</span>
+            <a href="#contact" class="cond" style="font-weight: 800; font-size: clamp(24px, 3vw, 34px); text-decoration: none">⟦email⟧</a>
+            <div style="display: flex; flex-wrap: wrap; gap: 8px 20px; font-weight: 600"><a href="#contact">GitHub</a><a href="#contact">LinkedIn</a><a href="#contact">⟦company.siteLabel⟧</a></div>
+          </div>
+          <div style="display: flex; flex-wrap: wrap; gap: 10px">
+            <button type="button" class="vbtn red cut-s" onClick="{{again}}">Play another round</button>
+          </div>
+        </div>
+        <span style="font-size: 13px; color: #5A6470; text-align: center">© Raphael Gabriel Geronimo · GG</span>
+      </section>
+    </sc-if>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1000}}'>
+class Component extends DCLogic {
+  shopData() {
+    return [
+      { title: 'Front end', color: '#5FD3FF', items: [
+        { id: 'fw', ty: 'Primary', nm: '[Framework]', cost: 2900, body: '[The front-end framework you reach for first, and why.]' },
+        { id: 'st', ty: 'Sidearm', nm: '[Styling]', cost: 800, body: '[How you style things: CSS approach, design systems.]' },
+        { id: 'tl', ty: 'Utility', nm: '[Tooling]', cost: 400, body: '[Build tools, testing, the stuff that keeps it clean.]' }
+      ] },
+      { title: 'Back end', color: '#FF4B5C', items: [
+        { id: 'lg', ty: 'Primary', nm: '[Language]', cost: 3200, body: '[Your main back-end language and what you build with it.]' },
+        { id: 'db', ty: 'Heavy', nm: '[Database]', cost: 1600, body: '[Databases you trust in production.]' },
+        { id: 'cl', ty: 'Utility', nm: '[Cloud]', cost: 1000, body: '[Where you deploy, and how.]' }
+      ] },
+      { title: 'Extras', color: '#F2C46D', items: [
+        { id: 'ds', ty: 'Shield', nm: '[Design]', cost: 1000, body: '[How you handle design and UX.]' },
+        { id: 'cf', ty: 'Ult', nm: 'Coffee', cost: 100, body: 'Ult ready. Cheap, effective, slightly overused.' }
+      ] }
+    ];
+  }
+  componentDidMount() {
+    this.timer = setInterval(() => this.tick(), 50);
+  }
+  componentWillUnmount() { clearInterval(this.timer); }
+  tick() {
+    const s = this.state || {};
+    const upd = {};
+    let changed = false;
+    // buy-phase clock (flavour only, nothing is forced)
+    this.ms = (this.ms || 0) + 50;
+    if (this.ms >= 1000) {
+      this.ms = 0;
+      const left = s.left === undefined ? 30 : s.left;
+      if ((s.phase || 'buy') === 'buy' && left > 0) { upd.left = left - 1; changed = true; }
+    }
+    // hold-to-plant progress
+    if (s.holding !== undefined && s.holding !== null) {
+      const p = Math.min(100, (s.prog || 0) + 50 / 1500 * 100);
+      if (p >= 100) {
+        const pl = Object.assign({}, s.planted || {}); pl[s.holding] = true;
+        upd.planted = pl; upd.holding = null; upd.prog = 0;
+      } else upd.prog = p;
+      changed = true;
+    }
+    if (changed) this.setState(upd);
+  }
+  renderVals() {
+    const s = this.state || {};
+    const phase = s.phase || 'buy';
+    const owned = s.owned || {};
+    const shop = this.shopData();
+    const all = [].concat.apply([], shop.map((g) => g.items));
+    const START = 12000;
+    const spent = all.filter((i) => owned[i.id]).reduce((a, i) => a + i.cost, 0);
+    const credits = START - spent;
+    const sel = all.filter((i) => i.id === s.sel)[0] || null;
+    const planted = s.planted || {};
+    const plantedN = Object.keys(planted).length;
+    const ownedN = all.filter((i) => owned[i.id]).length;
+    const left = s.left === undefined ? 30 : s.left;
+    const go = (p) => () => { this.setState({ phase: p, holding: null, prog: 0 }); try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch (e) {} };
+    const projects = [
+      { kind: '⟦p0.type⟧', name: '⟦p0.name⟧' },
+      { kind: '⟦p1.type⟧', name: '⟦p1.name⟧' },
+      { kind: '⟦p2.type⟧', name: '⟦p2.name⟧' }
+    ];
+    const sites = ['A', 'B', 'C'].map((L, k) => {
+      const done = !!planted[k];
+      const holding = s.holding === k;
+      return {
+        i: k,
+        letter: L,
+        cls: done ? 'done' : '',
+        letterColor: done ? '#FF4B5C' : '#EDE6DA',
+        status: done ? 'PLANTED ✓' : (holding ? 'PLANTING…' : 'SITE ' + L + ' · CLEAR'),
+        statusColor: done ? '#FF4B5C' : '#8A96A3',
+        planted: done,
+        canPlant: !done,
+        gridOp: done ? 0.4 : 1,
+        shotOp: done ? 1 : 0,
+        markOp: done ? 0 : (holding ? 1 : 0.5),
+        markSc: holding ? 0.6 + (s.prog || 0) / 250 : 1,
+        infoOp: done ? 1 : 0.25,
+        kind: done ? projects[k].kind : 'Site ' + L,
+        name: done ? projects[k].name : 'Plant to reveal',
+        body: done ? '⟦p{k}.summary⟧' : 'Hold the button until the bar fills.',
+        prog: holding ? Math.round(s.prog || 0) : 0,
+        holdLabel: holding ? 'Planting… keep holding' : 'Hold to plant',
+        aria: 'Plant on site ' + L + ' to reveal the project',
+        down: (e) => { if (e && e.button !== undefined && e.button !== 0) return; this.pressedAt = Date.now(); this.setState({ holding: k, prog: 0 }); },
+        up: () => { if (this.state && this.state.holding === k) this.setState({ holding: null, prog: 0 }); },
+        click: (e) => {
+          // keyboard users (and screen readers) plant on Enter/Space
+          if (e && e.detail === 0) { const pl = Object.assign({}, planted); pl[k] = true; this.setState({ planted: pl, holding: null, prog: 0 }); }
+        }
+      };
+    });
+    const flawless = plantedN === 3 && ownedN === all.length;
+    return {
+      phases: [['buy', 'Buy phase'], ['plant', 'Plant'], ['end', 'Scoreboard']].map((p, i) => ({ n: String(i + 1), label: p[1], cls: phase === p[0] ? 'on' : '', cur: phase === p[0] ? 'step' : 'false', go: go(p[0]) })),
+      clock: phase === 'buy' ? '0:' + String(left).padStart(2, '0') : (phase === 'plant' ? (s.holding !== null && s.holding !== undefined ? 'PLANTING' : 'LIVE') : 'GG'),
+      clockColor: phase === 'buy' && left <= 5 ? '#FF4B5C' : '#EDE6DA',
+      isBuy: phase === 'buy', isPlant: phase === 'plant', isEnd: phase === 'end',
+      credits: credits.toLocaleString('en-US'),
+      shop: shop.map((g) => ({ title: g.title, color: g.color, items: g.items.map((it) => ({
+        ty: it.ty, nm: it.nm,
+        cost: owned[it.id] ? 'OWNED ✓' : '◈ ' + it.cost.toLocaleString('en-US'),
+        cls: (owned[it.id] ? 'owned ' : '') + (s.sel === it.id ? 'sel' : ''),
+        pressed: owned[it.id] ? 'true' : 'false',
+        buy: () => { const o = Object.assign({}, owned); o[it.id] = !o[it.id]; this.setState({ owned: o, sel: it.id }); }
+      })) })),
+      selType: sel ? sel.ty + ' · ' + (owned[sel.id] ? 'equipped' : 'not bought') : 'Inspect',
+      selName: sel ? sel.nm : 'Pick something',
+      selBody: sel ? sel.body : 'Every item here is a skill. Click to buy it and read what it does. Click again to sell it back.',
+      loadout: all.filter((i) => owned[i.id]).map((i) => ({ nm: i.nm })),
+      emptyLoadout: ownedN === 0,
+      ownedN: String(ownedN),
+      buyAll: () => { const o = {}; all.forEach((i) => { o[i.id] = true; }); this.setState({ owned: o }); },
+      toPlant: go('plant'),
+      sites: sites,
+      plantedN: String(plantedN),
+      plantAll: () => this.setState({ planted: { 0: true, 1: true, 2: true }, holding: null, prog: 0 }),
+      toEnd: go('end'),
+      resultTitle: flawless ? 'Flawless' : (plantedN === 3 ? 'Round won' : 'Round over'),
+      resultSub: flawless ? 'full loadout · every site planted' : (plantedN === 3 ? 'every site planted' : plantedN + ' of 3 sites planted · go back and finish?'),
+      resultColor: plantedN === 3 ? '#3FD5A6' : '#EDE6DA',
+      again: () => { this.ms = 0; this.setState({ phase: 'buy', owned: {}, planted: {}, sel: null, left: 30, holding: null, prog: 0 }); }
+    };
+  }
+}
+</script>
+</body>
+</html>

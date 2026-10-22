@@ -1,0 +1,82 @@
+{
+ "Main": {
+  "slug": "/",
+  "comp": "Deal"
+ },
+ "Default": {
+  "slug": "/pro",
+  "comp": "Professional"
+ },
+ "Roughphael": {
+  "slug": "/rough-phael",
+  "comp": "RoughPhael"
+ },
+ "Rockphael": {
+  "slug": "/rock-phael",
+  "comp": "RockPhael"
+ },
+ "Rapphael": {
+  "slug": "/rap-hael",
+  "comp": "RapHael"
+ },
+ "Rafail": {
+  "slug": "/ra-fail",
+  "comp": "RaFail"
+ },
+ "Raphaelra": {
+  "slug": "/ra-phael",
+  "comp": "RaPhael"
+ },
+ "Godbriel": {
+  "slug": "/archangel",
+  "comp": "Archangel"
+ },
+ "Valoraph": {
+  "slug": "/valo-raph",
+  "comp": "ValoRaph"
+ },
+ "Grabriel": {
+  "slug": "/grab-riel",
+  "comp": "GrabRiel"
+ },
+ "Heronimo": {
+  "slug": "/hero-nimo",
+  "comp": "HeroNimo"
+ },
+ "Retronimo": {
+  "slug": "/retro-nimo",
+  "comp": "RetroNimo"
+ },
+ "Geronimo": {
+  "slug": "/geronimo",
+  "comp": "Geronimo"
+ },
+ "Gerodomino": {
+  "slug": "/gero-domino",
+  "comp": "GeroDomino"
+ },
+ "Wraphael": {
+  "slug": "/wrap-hael",
+  "comp": "WrapHael"
+ },
+ "Gaburrito": {
+  "slug": "/gab-urrito",
+  "comp": "GabUrrito"
+ },
+ "Gabreel": {
+  "slug": "/gab-reel",
+  "comp": "GabReel"
+ },
+ "Draftael": {
+  "slug": "/draft-ael",
+  "comp": "DraftAel"
+ },
+ "Cabriel": {
+  "slug": "/cab-riel",
+  "comp": "CabRiel"
+ },
+ "Labriel": {
+  "slug": "/lab-riel",
+  "comp": "LabRiel"
+ }
+}

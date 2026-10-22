@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Ra-fail — Raphael Gabriel Geronimo</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;800&amp;family=VT323&amp;display=swap">
+<style>
+body{margin:0;background:#0C0D10}
+a{color:#8BD5FF}a:hover{color:#FFFFFF}
+.scan{background-image:repeating-linear-gradient(0deg,rgba(255,255,255,.025) 0 1px,transparent 1px 3px)}
+.ln{display:grid;grid-template-columns:56px 118px 74px minmax(0,1fr);gap:0 14px;padding:3px 18px 3px 0;font-size:14px;line-height:1.6;align-items:baseline}
+.ln:hover{background:rgba(255,255,255,.03)}
+.no{color:#4B505C;text-align:right;user-select:none}
+.ts{color:#5E6472}
+.lv{font-weight:800}
+.INFO{color:#8BD5FF}.WARN{color:#FFC857}.ERROR{color:#FF4D6D}.OK{color:#39FF88}.FATAL{color:#0C0D10;background:#FF4D6D;padding:0 4px}.MOD{color:#C3A6FF}.ENV{color:#9AA0AC}
+@keyframes jit{0%,88%,100%{transform:translate(0,0)}90%{transform:translate(-5px,1px)}93%{transform:translate(6px,-2px)}96%{transform:translate(-2px,0)}}
+.glitch{text-shadow:4px 0 #FF2E63,-4px 0 #2EF2FF;animation:jit 2.6s infinite steps(1)}
+.frame{display:block;width:100%;text-align:left;background:transparent;border:0;color:inherit;font:inherit;cursor:pointer;padding:0}
+.frame:hover .fn{text-decoration:underline;text-underline-offset:4px}
+.btn{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:14px;background:transparent;color:#D6DAE3;border:1.5px solid #3A3F4B;padding:10px 16px;cursor:pointer;min-height:44px}
+.btn:hover{border-color:#8BD5FF;color:#8BD5FF}
+@media (max-width:720px){.ln{grid-template-columns:34px minmax(0,1fr);}.ln .ts,.ln .lv{display:none}}
+</style>
+</helmet>
+<div class="scan" style="min-height: 100vh; background: #0C0D10; color: #D6DAE3; font-family: 'JetBrains Mono', ui-monospace, monospace">
+
+  <div style="background: #FF4D6D; color: #0C0D10; font-size: 14px; padding: 10px 24px; display: flex; flex-wrap: wrap; gap: 8px 20px; justify-content: center; align-items: center; font-weight: 600">
+    <span>Theme: Ra-fail</span>
+    <a href="Default.dc.html" style="color: #0C0D10; padding: 6px 0">Switch to professional</a>
+    <a href="Main.dc.html" style="color: #0C0D10; padding: 6px 0">Deal again</a>
+  </div>
+
+  <div style="position: sticky; top: 0; z-index: 5; background: #14161B; border-bottom: 1px solid #23262E; padding: 10px 18px; display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; justify-content: space-between; font-size: 13px">
+    <div style="display: flex; gap: 8px; align-items: center"><span aria-hidden="true" style="width: 11px; height: 11px; border-radius: 50%; background: #FF4D6D"></span><span aria-hidden="true" style="width: 11px; height: 11px; border-radius: 50%; background: #FFC857"></span><span aria-hidden="true" style="width: 11px; height: 11px; border-radius: 50%; background: #39FF88"></span><span style="margin-left: 8px; color: #9AA0AC">rgg.log — tail -f</span></div>
+    <div style="display: flex; gap: 8px; align-items: center; flex-wrap: wrap">
+      <span style="color: #5E6472">{{shown}} / {{total}} lines</span>
+      <button type="button" class="btn" onClick="{{skip}}" style="padding: 6px 12px; min-height: 36px">Skip to end</button>
+    </div>
+  </div>
+
+  <main style="max-width: 1180px; margin: 0 auto; padding: 18px 0 80px">
+    <sc-for list="{{lines}}" as="l" hint-placeholder-count="12">
+      <sc-if value="{{l.isBanner}}" hint-placeholder-val="{{false}}">
+        <section id="top" style="padding: 28px 18px 30px 70px; display: flex; flex-direction: column; gap: 10px">
+          <h1 class="glitch" style="margin: 0; font-family: 'VT323', monospace; font-weight: 400; font-size: clamp(96px, 16vw, 220px); line-height: 0.8; color: #FFFFFF">Ra-fail</h1>
+          <p style="margin: 0; font-size: 16px; line-height: 1.7; color: #9AA0AC; max-width: 640px">Raphael Gabriel Geronimo · full-stack developer &amp; founder. This portfolio crashes on purpose — then recovers. Scroll the log.</p>
+        </section>
+      </sc-if>
+      <sc-if value="{{l.isLine}}" hint-placeholder-val="{{true}}">
+        <div class="ln"><span class="no">{{l.no}}</span><span class="ts">{{l.ts}}</span><span class="lv {{l.lvl}}">{{l.lvl}}</span><span>{{l.msg}}</span></div>
+      </sc-if>
+      <sc-if value="{{l.isModule}}" hint-placeholder-val="{{false}}">
+        <div id="{{l.anchor}}" class="ln"><span class="no">{{l.no}}</span><span class="ts">{{l.ts}}</span><span class="lv MOD">MODULE</span><span><b style="color: #C3A6FF">{{l.name}}</b> <span style="color: #5E6472">··········</span> <span style="color: #39FF88">loaded</span> — {{l.msg}}</span></div>
+      </sc-if>
+      <sc-if value="{{l.isFatal}}" hint-placeholder-val="{{false}}">
+        <section style="margin: 18px 0; background: #1A0D12; border-top: 2px solid #FF4D6D; border-bottom: 2px solid #FF4D6D; padding: 22px 18px 22px 70px; display: flex; flex-direction: column; gap: 8px">
+          <div style="font-size: 13px; color: #FF4D6D; font-weight: 800">{{l.ts}} · FATAL</div>
+          <div class="glitch" style="font-family: 'VT323', monospace; font-size: clamp(34px, 5.4vw, 64px); line-height: 0.95; color: #FFFFFF">Uncaught TooManySkillsException</div>
+          <div style="font-size: 15px; color: #F2B8C4">portfolio.render() overflowed: one page cannot contain this much developer.</div>
+        </section>
+      </sc-if>
+      <sc-if value="{{l.isFrame}}" hint-placeholder-val="{{false}}">
+        <div id="{{l.anchor}}" style="border-left: 2px solid #3A3F4B; margin: 2px 0 2px 70px">
+          <button type="button" class="frame" onClick="{{l.toggle}}" aria-expanded="{{l.open}}">
+            <div class="ln" style="grid-template-columns: minmax(0, 1fr) auto; padding-left: 14px"><span><span style="color: #9AA0AC">at</span> <span class="fn" style="color: #FFFFFF; font-weight: 600">Project.{{l.name}}</span> <span style="color: #5E6472">({{l.file}})</span></span><span style="color: #8BD5FF">{{l.caret}}</span></div>
+          </button>
+          <sc-if value="{{l.open}}" hint-placeholder-val="{{false}}">
+            <div style="padding: 6px 18px 18px 14px; display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start">
+              <div style="flex: 0 0 220px; height: 130px; border: 1px dashed #3A3F4B; display: flex; align-items: center; justify-content: center; font-size: 12px; color: #5E6472">⟦p{l.pi}.shot⟧</div>
+              <div style="flex: 1 1 280px; display: flex; flex-direction: column; gap: 8px; font-size: 14px; line-height: 1.6">
+                <span style="color: #D6DAE3">{{l.desc}}</span>
+                <span style="color: #9AA0AC">stack: ⟦p{l.pi}.stack⟧ · type: {{l.type}}</span>
+                <a href="#work" style="align-self: flex-start">open case study →</a>
+              </div>
+            </div>
+          </sc-if>
+        </div>
+      </sc-if>
+      <sc-if value="{{l.isProcess}}" hint-placeholder-val="{{false}}">
+        <section id="venture" style="margin: 16px 18px 16px 70px; border: 1.5px solid #39FF88; padding: 18px 20px; display: flex; flex-wrap: wrap; gap: 12px 28px; align-items: center; justify-content: space-between">
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <span style="font-size: 13px; color: #39FF88">PID 1 · founder · status: running ●</span>
+            <span style="font-family: 'VT323', monospace; font-size: 46px; line-height: 0.9; color: #FFFFFF">⟦company.name⟧</span>
+            <span style="font-size: 14px; color: #9AA0AC">⟦company.summary⟧</span>
+          </div>
+          <a href="#venture" class="btn" style="text-decoration: none">attach to process →</a>
+        </section>
+      </sc-if>
+      <sc-if value="{{l.isContact}}" hint-placeholder-val="{{false}}">
+        <section id="contact" style="margin: 26px 18px 0 70px; padding: 26px 0 0; border-top: 1px solid #23262E; display: flex; flex-direction: column; gap: 14px">
+          <div style="font-size: 13px; color: #39FF88">✓ system recovered · 0 projects lost</div>
+          <h2 style="margin: 0; font-family: 'VT323', monospace; font-weight: 400; font-size: clamp(56px, 9vw, 110px); line-height: 0.85; color: #FFFFFF">Report a bug<br><span style="color: #8BD5FF">(or a project).</span></h2>
+          <a href="#contact" style="font-size: clamp(18px, 2.6vw, 24px); font-weight: 600">⟦email⟧</a>
+          <div style="display: flex; flex-wrap: wrap; gap: 10px 22px; font-size: 14px"><a href="#contact">GitHub</a><a href="#contact">LinkedIn</a><a href="#contact">⟦company.siteLabel⟧</a></div>
+          <div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-top: 8px">
+            <button type="button" class="btn" onClick="{{replay}}" style="border-color: #FF4D6D; color: #FF4D6D">Crash it again</button>
+            <span style="font-size: 13px; color: #5E6472">process exited with code 0 · © Raphael Gabriel Geronimo</span>
+          </div>
+        </section>
+      </sc-if>
+    </sc-for>
+    <sc-if value="{{streaming}}" hint-placeholder-val="{{false}}">
+      <div style="padding: 6px 0 0 70px; color: #39FF88">▍</div>
+    </sc-if>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2400}}'>
+class Component extends DCLogic {
+  script() {
+    return [
+      { k: 'banner' },
+      { k: 'line', lvl: 'INFO', msg: 'Booting raphael@portfolio …' },
+      { k: 'line', lvl: 'INFO', msg: 'Identity resolved: Raphael Gabriel Geronimo' },
+      { k: 'line', lvl: 'INFO', msg: 'Role resolved: full-stack developer + founder + professional tech geek' },
+      { k: 'module', name: 'front_end', msg: '⟦skills.frontend⟧', anchor: 'about' },
+      { k: 'module', name: 'back_end', msg: '⟦skills.backend⟧' },
+      { k: 'module', name: 'business', msg: '⟦skills.business⟧' },
+      { k: 'line', lvl: 'WARN', msg: 'Curiosity exceeds recommended limits (it always does)' },
+      { k: 'line', lvl: 'WARN', msg: 'Coffee level: [low / critical / irrelevant]' },
+      { k: 'line', lvl: 'ERROR', msg: 'Too many skills for a single page' },
+      { k: 'fatal' },
+      { k: 'line', lvl: 'INFO', msg: 'Dumping core — here is everything that was running:' },
+      { k: 'frame', name: '⟦p0.name|nospace⟧', file: 'web-app.js:01', pi: 0, type: '⟦p0.type⟧', desc: '⟦p0.summary⟧', anchor: 'work' },
+      { k: 'frame', name: '⟦p1.name|nospace⟧', file: 'api-platform.ts:02', pi: 1, type: '⟦p1.type⟧', desc: '⟦p1.summary⟧' },
+      { k: 'frame', name: '⟦p2.name|nospace⟧', file: 'side-project.swift:03', pi: 2, type: '⟦p2.type⟧', desc: '⟦p2.summary⟧' },
+      { k: 'line', lvl: 'INFO', msg: 'Inspecting running processes …' },
+      { k: 'process' },
+      { k: 'line', lvl: 'ENV', msg: 'env.LOCATION = ⟦city⟧' },
+      { k: 'line', lvl: 'ENV', msg: 'env.OPEN_TO = [freelance / partnerships / roles]' },
+      { k: 'line', lvl: 'INFO', msg: 'Attempting recovery …' },
+      { k: 'line', lvl: 'OK', msg: 'Recovered. Portfolio restored. Nothing was actually broken.' },
+      { k: 'contact' }
+    ];
+  }
+  componentDidMount() {
+    this.mounted = true;
+    this.start();
+  }
+  componentWillUnmount() {
+    clearInterval(this.timer);
+  }
+  start() {
+    clearInterval(this.timer);
+    this.setState({ n: 1 });
+    const total = this.script().length;
+    this.timer = setInterval(() => {
+      const n = (this.state && this.state.n) || 0;
+      if (n >= total) { clearInterval(this.timer); return; }
+      this.setState({ n: n + 1 });
+    }, 260);
+  }
+  renderVals() {
+    const s = this.state || {};
+    const all = this.script();
+    const total = all.length;
+    const n = this.mounted ? Math.min(s.n || 0, total) : total;
+    const open = s.open || {};
+    let lineNo = 0;
+    const lines = all.slice(0, n).map((l, i) => {
+      lineNo += 1;
+      const secs = (1.2 + i * 0.37).toFixed(3);
+      const o = {
+        no: lineNo,
+        ts: '00:00:' + (secs.length < 6 ? '0' + secs : secs),
+        lvl: l.lvl || '',
+        msg: l.msg || '',
+        name: l.name || '',
+        file: l.file || '',
+        type: l.type || '',
+        desc: l.desc || '',
+        anchor: l.anchor || ('l' + i),
+        isBanner: l.k === 'banner', isLine: l.k === 'line', isModule: l.k === 'module', isFatal: l.k === 'fatal',
+        pi: l.pi || 0, isFrame: l.k === 'frame', isProcess: l.k === 'process', isContact: l.k === 'contact'
+      };
+      if (l.k === 'frame') {
+        const isOpen = open[i] !== false;
+        o.open = isOpen;
+        o.caret = isOpen ? '▾ collapse' : '▸ expand';
+        o.toggle = () => {
+          const next = Object.assign({}, (this.state && this.state.open) || {});
+          next[i] = !isOpen;
+          this.setState({ open: next });
+        };
+      }
+      return o;
+    });
+    return {
+      lines: lines,
+      shown: n,
+      total: total,
+      streaming: this.mounted && n < total,
+      skip: () => { clearInterval(this.timer); this.setState({ n: total }); },
+      replay: () => this.start()
+    };
+  }
+}
+</script>
+</body>
+</html>
